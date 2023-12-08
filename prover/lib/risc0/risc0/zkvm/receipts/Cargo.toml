@@ -1,7 +1,0 @@
-[package]
-name = "risc0-zkvm-receipts"
-version = { workspace = true }
-edition = { workspace = true }
-
-[package.metadata.release]
-release = false
