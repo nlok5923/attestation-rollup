@@ -1,0 +1,79 @@
+.navbar {
+    box-shadow: 0px 0px 4px rgba(173, 173, 173, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  .nav-items {
+    justify-content: space-evenly;
+    display: flex;
+    font-family: "montserrat";
+    align-items: center;
+    font-size: 17px;
+  }
+  .brand-name,.brand-name:hover{
+    cursor: default;
+    font-family: "montserrat";
+    font-size: 28px;
+    line-height: 30.55px;
+    color: black;
+  }
+  .brand-name-blue,.brand-name-blue:hover {
+    color: #59afff;
+  }
+  .nav-items li {
+    list-style-type: none;
+    margin: 0 20px;
+    font-size: 16px;
+  }
+  .nav-items li a {
+    text-decoration: none;
+    color: black;
+  }
+  .nav-items li a:hover{
+    color: #59afff;
+  }
+  .nav-items .login-btn {
+    font-weight: 700;
+    color: #59afff;
+  }
+  .nav-items .register-btn {
+    background-color: #59afff;
+    color: white;
+    font-weight: 700;
+    border-radius: 30px;
+    padding: 5px 9px;
+  }
+  .navbar .search-box {
+    display: flex;
+    background: #ffffff;
+    opacity: 0.4;
+    align-items: center;
+    border: 1px solid #acacac;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 8px rgba(69, 69, 69, 0.25);
+    border-radius: 30px;
+    padding: 5px 10px;
+  }
+  .navbar .search-box input {
+    border: none;
+    outline: none;
+    width: 500px;
+  }
+  .navbar .search-box img {
+    height: 16px;
+    padding-right: 5px;
+  }
+  .navbar .nav-items {
+    margin: 0;
+  }
+  .navbar .nav-profile-img{
+    height: 25px;
+    cursor: pointer;
+  }
+  .navbar .nav-profile-name{
+    font-size: 15px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
