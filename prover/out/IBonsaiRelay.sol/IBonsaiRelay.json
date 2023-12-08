@@ -1,0 +1,1519 @@
+{
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes32",
+          "name": "imageId",
+          "type": "bytes32"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "input",
+          "type": "bytes"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "callbackContract",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes4",
+          "name": "functionSelector",
+          "type": "bytes4"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "gasLimit",
+          "type": "uint64"
+        }
+      ],
+      "name": "CallbackRequest",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "imageId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "journal",
+          "type": "bytes"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bytes",
+              "name": "seal",
+              "type": "bytes"
+            },
+            {
+              "internalType": "bytes32",
+              "name": "postStateDigest",
+              "type": "bytes32"
+            }
+          ],
+          "internalType": "struct CallbackAuthorization",
+          "name": "auth",
+          "type": "tuple"
+        }
+      ],
+      "name": "callbackIsAuthorized",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "bytes",
+                  "name": "seal",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "postStateDigest",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct CallbackAuthorization",
+              "name": "auth",
+              "type": "tuple"
+            },
+            {
+              "internalType": "address",
+              "name": "callbackContract",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "payload",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint64",
+              "name": "gasLimit",
+              "type": "uint64"
+            }
+          ],
+          "internalType": "struct Callback",
+          "name": "callback",
+          "type": "tuple"
+        }
+      ],
+      "name": "invokeCallback",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "bytes",
+                  "name": "seal",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "postStateDigest",
+                  "type": "bytes32"
+                }
+              ],
+              "internalType": "struct CallbackAuthorization",
+              "name": "auth",
+              "type": "tuple"
+            },
+            {
+              "internalType": "address",
+              "name": "callbackContract",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes",
+              "name": "payload",
+              "type": "bytes"
+            },
+            {
+              "internalType": "uint64",
+              "name": "gasLimit",
+              "type": "uint64"
+            }
+          ],
+          "internalType": "struct Callback[]",
+          "name": "callbacks",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "invokeCallbacks",
+      "outputs": [
+        {
+          "internalType": "bool[]",
+          "name": "invocationResults",
+          "type": "bool[]"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "imageId",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "bytes",
+          "name": "input",
+          "type": "bytes"
+        },
+        {
+          "internalType": "address",
+          "name": "callbackContract",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes4",
+          "name": "functionSelector",
+          "type": "bytes4"
+        },
+        {
+          "internalType": "uint64",
+          "name": "gasLimit",
+          "type": "uint64"
+        }
+      ],
+      "name": "requestCallback",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x",
+    "sourceMap": "",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "callbackIsAuthorized(bytes32,bytes,(bytes,bytes32))": "59611e67",
+    "invokeCallback(((bytes,bytes32),address,bytes,uint64))": "83a19d39",
+    "invokeCallbacks(((bytes,bytes32),address,bytes,uint64)[])": "13ef1412",
+    "requestCallback(bytes32,bytes,address,bytes4,uint64)": "e80802a2"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"address\",\"name\":\"account\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes32\",\"name\":\"imageId\",\"type\":\"bytes32\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"callbackContract\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes4\",\"name\":\"functionSelector\",\"type\":\"bytes4\"},{\"indexed\":false,\"internalType\":\"uint64\",\"name\":\"gasLimit\",\"type\":\"uint64\"}],\"name\":\"CallbackRequest\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"imageId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"journal\",\"type\":\"bytes\"},{\"components\":[{\"internalType\":\"bytes\",\"name\":\"seal\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"postStateDigest\",\"type\":\"bytes32\"}],\"internalType\":\"struct CallbackAuthorization\",\"name\":\"auth\",\"type\":\"tuple\"}],\"name\":\"callbackIsAuthorized\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"seal\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"postStateDigest\",\"type\":\"bytes32\"}],\"internalType\":\"struct CallbackAuthorization\",\"name\":\"auth\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"callbackContract\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"payload\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"gasLimit\",\"type\":\"uint64\"}],\"internalType\":\"struct Callback\",\"name\":\"callback\",\"type\":\"tuple\"}],\"name\":\"invokeCallback\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"components\":[{\"components\":[{\"internalType\":\"bytes\",\"name\":\"seal\",\"type\":\"bytes\"},{\"internalType\":\"bytes32\",\"name\":\"postStateDigest\",\"type\":\"bytes32\"}],\"internalType\":\"struct CallbackAuthorization\",\"name\":\"auth\",\"type\":\"tuple\"},{\"internalType\":\"address\",\"name\":\"callbackContract\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"payload\",\"type\":\"bytes\"},{\"internalType\":\"uint64\",\"name\":\"gasLimit\",\"type\":\"uint64\"}],\"internalType\":\"struct Callback[]\",\"name\":\"callbacks\",\"type\":\"tuple[]\"}],\"name\":\"invokeCallbacks\",\"outputs\":[{\"internalType\":\"bool[]\",\"name\":\"invocationResults\",\"type\":\"bool[]\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"imageId\",\"type\":\"bytes32\"},{\"internalType\":\"bytes\",\"name\":\"input\",\"type\":\"bytes\"},{\"internalType\":\"address\",\"name\":\"callbackContract\",\"type\":\"address\"},{\"internalType\":\"bytes4\",\"name\":\"functionSelector\",\"type\":\"bytes4\"},{\"internalType\":\"uint64\",\"name\":\"gasLimit\",\"type\":\"uint64\"}],\"name\":\"requestCallback\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"callbackIsAuthorized(bytes32,bytes,(bytes,bytes32))\":{\"details\":\"A (imageId, journal) pair should be valid, and the respective callback authorized, if     and only if the journal is the result of the correct execution of the zkVM guest.\"},\"invokeCallback(((bytes,bytes32),address,bytes,uint64))\":{\"details\":\"This function is usually called by the Bonsai Relay. This function reverts if the callback fails.\"},\"invokeCallbacks(((bytes,bytes32),address,bytes,uint64)[])\":{\"details\":\"This function is usually called by the Bonsai Relay. Note that this function does not     revert when one of the inner callbacks reverts.\",\"returns\":{\"invocationResults\":\"a list of booleans indicated if the calldata succeeded or failed.\"}},\"requestCallback(bytes32,bytes,address,bytes4,uint64)\":{\"details\":\"This function will usually be called be the Bonsai user's application contract, and     will log an event that the Bonsai Relay will detect and respond to.\"}},\"version\":1},\"userdoc\":{\"events\":{\"CallbackRequest(address,bytes32,bytes,address,bytes4,uint64)\":{\"notice\":\"Event emitted upon receiving a callback request through requestCallback.\"}},\"kind\":\"user\",\"methods\":{\"callbackIsAuthorized(bytes32,bytes,(bytes,bytes32))\":{\"notice\":\"Determines if the given authorization is valid for the image ID and journal.\"},\"invokeCallback(((bytes,bytes32),address,bytes,uint64))\":{\"notice\":\"Submit a single callback, authorized by an attached SNARK proof.\"},\"invokeCallbacks(((bytes,bytes32),address,bytes,uint64)[])\":{\"notice\":\"Submit a batch of callbacks, authorized by an attached SNARK proof.\"},\"requestCallback(bytes32,bytes,address,bytes4,uint64)\":{\"notice\":\"Submit request to receive a callback.\"}},\"notice\":\"The interface for the Bonsai relay contract\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"lib/risc0/bonsai/ethereum/contracts/IBonsaiRelay.sol\":\"IBonsaiRelay\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":bonsai/=lib/risc0/bonsai/ethereum/contracts/\",\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/\",\":forge-std/=lib/forge-std/src/\",\":murky/=lib/murky/src/\",\":murky_differential_testing/=lib/murky/differential_testing/\",\":openzeppelin-contracts/=lib/openzeppelin-contracts/\",\":openzeppelin/=lib/openzeppelin-contracts/\",\":risc0/=lib/risc0/\",\":solidity-bytes-utils/=lib/solidity-bytes-utils/contracts/\"]},\"sources\":{\"lib/risc0/bonsai/ethereum/contracts/IBonsaiRelay.sol\":{\"keccak256\":\"0x572745471df585157d0bfaca2ddff54880600fe2c86f789721126e2ff233bddf\",\"license\":\"Apache-2.0\",\"urls\":[\"bzz-raw://10fffd6023d2c63b79d4ae6e92d3d53a9d7f7b16e8208c6335ed6d0415ed5552\",\"dweb:/ipfs/QmR6KxrM6EzC5Rh1qmGrv7A8YAfmp6ZU1tYYW12jfdopKM\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.20+commit.a1b79de6"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "address",
+              "name": "account",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes32",
+              "name": "imageId",
+              "type": "bytes32",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes",
+              "name": "input",
+              "type": "bytes",
+              "indexed": false
+            },
+            {
+              "internalType": "address",
+              "name": "callbackContract",
+              "type": "address",
+              "indexed": false
+            },
+            {
+              "internalType": "bytes4",
+              "name": "functionSelector",
+              "type": "bytes4",
+              "indexed": false
+            },
+            {
+              "internalType": "uint64",
+              "name": "gasLimit",
+              "type": "uint64",
+              "indexed": false
+            }
+          ],
+          "type": "event",
+          "name": "CallbackRequest",
+          "anonymous": false
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "imageId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "journal",
+              "type": "bytes"
+            },
+            {
+              "internalType": "struct CallbackAuthorization",
+              "name": "auth",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "bytes",
+                  "name": "seal",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "bytes32",
+                  "name": "postStateDigest",
+                  "type": "bytes32"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "callbackIsAuthorized",
+          "outputs": [
+            {
+              "internalType": "bool",
+              "name": "",
+              "type": "bool"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct Callback",
+              "name": "callback",
+              "type": "tuple",
+              "components": [
+                {
+                  "internalType": "struct CallbackAuthorization",
+                  "name": "auth",
+                  "type": "tuple",
+                  "components": [
+                    {
+                      "internalType": "bytes",
+                      "name": "seal",
+                      "type": "bytes"
+                    },
+                    {
+                      "internalType": "bytes32",
+                      "name": "postStateDigest",
+                      "type": "bytes32"
+                    }
+                  ]
+                },
+                {
+                  "internalType": "address",
+                  "name": "callbackContract",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "payload",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "gasLimit",
+                  "type": "uint64"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "invokeCallback"
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "struct Callback[]",
+              "name": "callbacks",
+              "type": "tuple[]",
+              "components": [
+                {
+                  "internalType": "struct CallbackAuthorization",
+                  "name": "auth",
+                  "type": "tuple",
+                  "components": [
+                    {
+                      "internalType": "bytes",
+                      "name": "seal",
+                      "type": "bytes"
+                    },
+                    {
+                      "internalType": "bytes32",
+                      "name": "postStateDigest",
+                      "type": "bytes32"
+                    }
+                  ]
+                },
+                {
+                  "internalType": "address",
+                  "name": "callbackContract",
+                  "type": "address"
+                },
+                {
+                  "internalType": "bytes",
+                  "name": "payload",
+                  "type": "bytes"
+                },
+                {
+                  "internalType": "uint64",
+                  "name": "gasLimit",
+                  "type": "uint64"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "invokeCallbacks",
+          "outputs": [
+            {
+              "internalType": "bool[]",
+              "name": "invocationResults",
+              "type": "bool[]"
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "internalType": "bytes32",
+              "name": "imageId",
+              "type": "bytes32"
+            },
+            {
+              "internalType": "bytes",
+              "name": "input",
+              "type": "bytes"
+            },
+            {
+              "internalType": "address",
+              "name": "callbackContract",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes4",
+              "name": "functionSelector",
+              "type": "bytes4"
+            },
+            {
+              "internalType": "uint64",
+              "name": "gasLimit",
+              "type": "uint64"
+            }
+          ],
+          "stateMutability": "nonpayable",
+          "type": "function",
+          "name": "requestCallback"
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {
+          "callbackIsAuthorized(bytes32,bytes,(bytes,bytes32))": {
+            "details": "A (imageId, journal) pair should be valid, and the respective callback authorized, if     and only if the journal is the result of the correct execution of the zkVM guest."
+          },
+          "invokeCallback(((bytes,bytes32),address,bytes,uint64))": {
+            "details": "This function is usually called by the Bonsai Relay. This function reverts if the callback fails."
+          },
+          "invokeCallbacks(((bytes,bytes32),address,bytes,uint64)[])": {
+            "details": "This function is usually called by the Bonsai Relay. Note that this function does not     revert when one of the inner callbacks reverts.",
+            "returns": {
+              "invocationResults": "a list of booleans indicated if the calldata succeeded or failed."
+            }
+          },
+          "requestCallback(bytes32,bytes,address,bytes4,uint64)": {
+            "details": "This function will usually be called be the Bonsai user's application contract, and     will log an event that the Bonsai Relay will detect and respond to."
+          }
+        },
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {
+          "callbackIsAuthorized(bytes32,bytes,(bytes,bytes32))": {
+            "notice": "Determines if the given authorization is valid for the image ID and journal."
+          },
+          "invokeCallback(((bytes,bytes32),address,bytes,uint64))": {
+            "notice": "Submit a single callback, authorized by an attached SNARK proof."
+          },
+          "invokeCallbacks(((bytes,bytes32),address,bytes,uint64)[])": {
+            "notice": "Submit a batch of callbacks, authorized by an attached SNARK proof."
+          },
+          "requestCallback(bytes32,bytes,address,bytes4,uint64)": {
+            "notice": "Submit request to receive a callback."
+          }
+        },
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        ":bonsai/=lib/risc0/bonsai/ethereum/contracts/",
+        ":ds-test/=lib/forge-std/lib/ds-test/src/",
+        ":erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/",
+        ":forge-std/=lib/forge-std/src/",
+        ":murky/=lib/murky/src/",
+        ":murky_differential_testing/=lib/murky/differential_testing/",
+        ":openzeppelin-contracts/=lib/openzeppelin-contracts/",
+        ":openzeppelin/=lib/openzeppelin-contracts/",
+        ":risc0/=lib/risc0/",
+        ":solidity-bytes-utils/=lib/solidity-bytes-utils/contracts/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "lib/risc0/bonsai/ethereum/contracts/IBonsaiRelay.sol": "IBonsaiRelay"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "lib/risc0/bonsai/ethereum/contracts/IBonsaiRelay.sol": {
+        "keccak256": "0x572745471df585157d0bfaca2ddff54880600fe2c86f789721126e2ff233bddf",
+        "urls": [
+          "bzz-raw://10fffd6023d2c63b79d4ae6e92d3d53a9d7f7b16e8208c6335ed6d0415ed5552",
+          "dweb:/ipfs/QmR6KxrM6EzC5Rh1qmGrv7A8YAfmp6ZU1tYYW12jfdopKM"
+        ],
+        "license": "Apache-2.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "lib/risc0/bonsai/ethereum/contracts/IBonsaiRelay.sol",
+    "id": 32810,
+    "exportedSymbols": {
+      "Callback": [
+        32747
+      ],
+      "CallbackAuthorization": [
+        32733
+      ],
+      "IBonsaiRelay": [
+        32809
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "635:3167:30",
+    "nodes": [
+      {
+        "id": 32725,
+        "nodeType": "PragmaDirective",
+        "src": "635:24:30",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".17"
+        ]
+      },
+      {
+        "id": 32733,
+        "nodeType": "StructDefinition",
+        "src": "741:418:30",
+        "nodes": [],
+        "canonicalName": "CallbackAuthorization",
+        "documentation": {
+          "id": 32726,
+          "nodeType": "StructuredDocumentation",
+          "src": "661:80:30",
+          "text": "@notice Data required to authorize a callback to be sent through the relay."
+        },
+        "members": [
+          {
+            "constant": false,
+            "id": 32729,
+            "mutability": "mutable",
+            "name": "seal",
+            "nameLocation": "871:4:30",
+            "nodeType": "VariableDeclaration",
+            "scope": 32733,
+            "src": "865:10:30",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes_storage_ptr",
+              "typeString": "bytes"
+            },
+            "typeName": {
+              "id": 32728,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "865:5:30",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 32732,
+            "mutability": "mutable",
+            "name": "postStateDigest",
+            "nameLocation": "1141:15:30",
+            "nodeType": "VariableDeclaration",
+            "scope": 32733,
+            "src": "1133:23:30",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes32",
+              "typeString": "bytes32"
+            },
+            "typeName": {
+              "id": 32731,
+              "name": "bytes32",
+              "nodeType": "ElementaryTypeName",
+              "src": "1133:7:30",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes32",
+                "typeString": "bytes32"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "name": "CallbackAuthorization",
+        "nameLocation": "748:21:30",
+        "scope": 32810,
+        "visibility": "public"
+      },
+      {
+        "id": 32747,
+        "nodeType": "StructDefinition",
+        "src": "1219:621:30",
+        "nodes": [],
+        "canonicalName": "Callback",
+        "documentation": {
+          "id": 32734,
+          "nodeType": "StructuredDocumentation",
+          "src": "1161:58:30",
+          "text": "@notice Callback data, provided by the Relay service."
+        },
+        "members": [
+          {
+            "constant": false,
+            "id": 32737,
+            "mutability": "mutable",
+            "name": "auth",
+            "nameLocation": "1263:4:30",
+            "nodeType": "VariableDeclaration",
+            "scope": 32747,
+            "src": "1241:26:30",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_struct$_CallbackAuthorization_$32733_storage_ptr",
+              "typeString": "struct CallbackAuthorization"
+            },
+            "typeName": {
+              "id": 32736,
+              "nodeType": "UserDefinedTypeName",
+              "pathNode": {
+                "id": 32735,
+                "name": "CallbackAuthorization",
+                "nameLocations": [
+                  "1241:21:30"
+                ],
+                "nodeType": "IdentifierPath",
+                "referencedDeclaration": 32733,
+                "src": "1241:21:30"
+              },
+              "referencedDeclaration": 32733,
+              "src": "1241:21:30",
+              "typeDescriptions": {
+                "typeIdentifier": "t_struct$_CallbackAuthorization_$32733_storage_ptr",
+                "typeString": "struct CallbackAuthorization"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 32740,
+            "mutability": "mutable",
+            "name": "callbackContract",
+            "nameLocation": "1346:16:30",
+            "nodeType": "VariableDeclaration",
+            "scope": 32747,
+            "src": "1338:24:30",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 32739,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "1338:7:30",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 32743,
+            "mutability": "mutable",
+            "name": "payload",
+            "nameLocation": "1740:7:30",
+            "nodeType": "VariableDeclaration",
+            "scope": 32747,
+            "src": "1734:13:30",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_bytes_storage_ptr",
+              "typeString": "bytes"
+            },
+            "typeName": {
+              "id": 32742,
+              "name": "bytes",
+              "nodeType": "ElementaryTypeName",
+              "src": "1734:5:30",
+              "typeDescriptions": {
+                "typeIdentifier": "t_bytes_storage_ptr",
+                "typeString": "bytes"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 32746,
+            "mutability": "mutable",
+            "name": "gasLimit",
+            "nameLocation": "1829:8:30",
+            "nodeType": "VariableDeclaration",
+            "scope": 32747,
+            "src": "1822:15:30",
+            "stateVariable": false,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint64",
+              "typeString": "uint64"
+            },
+            "typeName": {
+              "id": 32745,
+              "name": "uint64",
+              "nodeType": "ElementaryTypeName",
+              "src": "1822:6:30",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint64",
+                "typeString": "uint64"
+              }
+            },
+            "visibility": "internal"
+          }
+        ],
+        "name": "Callback",
+        "nameLocation": "1226:8:30",
+        "scope": 32810,
+        "visibility": "public"
+      },
+      {
+        "id": 32809,
+        "nodeType": "ContractDefinition",
+        "src": "1898:1903:30",
+        "nodes": [
+          {
+            "id": 32763,
+            "nodeType": "EventDefinition",
+            "src": "2016:191:30",
+            "nodes": [],
+            "anonymous": false,
+            "documentation": {
+              "id": 32749,
+              "nodeType": "StructuredDocumentation",
+              "src": "1927:84:30",
+              "text": "@notice Event emitted upon receiving a callback request through requestCallback."
+            },
+            "eventSelector": "105b7c9dbbc865638cd7873341700bcf4c62dfc9a4f221425b56fde3408f6a85",
+            "name": "CallbackRequest",
+            "nameLocation": "2022:15:30",
+            "parameters": {
+              "id": 32762,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 32751,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "account",
+                  "nameLocation": "2055:7:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32763,
+                  "src": "2047:15:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 32750,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2047:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32753,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "imageId",
+                  "nameLocation": "2080:7:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32763,
+                  "src": "2072:15:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 32752,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2072:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32755,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "input",
+                  "nameLocation": "2103:5:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32763,
+                  "src": "2097:11:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 32754,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2097:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32757,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "callbackContract",
+                  "nameLocation": "2126:16:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32763,
+                  "src": "2118:24:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 32756,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2118:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32759,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "functionSelector",
+                  "nameLocation": "2159:16:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32763,
+                  "src": "2152:23:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 32758,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2152:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32761,
+                  "indexed": false,
+                  "mutability": "mutable",
+                  "name": "gasLimit",
+                  "nameLocation": "2192:8:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32763,
+                  "src": "2185:15:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 32760,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2185:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2037:169:30"
+            }
+          },
+          {
+            "id": 32777,
+            "nodeType": "FunctionDefinition",
+            "src": "2444:187:30",
+            "nodes": [],
+            "documentation": {
+              "id": 32764,
+              "nodeType": "StructuredDocumentation",
+              "src": "2213:226:30",
+              "text": "@notice Submit request to receive a callback.\n @dev This function will usually be called be the Bonsai user's application contract, and\n     will log an event that the Bonsai Relay will detect and respond to."
+            },
+            "functionSelector": "e80802a2",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "requestCallback",
+            "nameLocation": "2453:15:30",
+            "parameters": {
+              "id": 32775,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 32766,
+                  "mutability": "mutable",
+                  "name": "imageId",
+                  "nameLocation": "2486:7:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32777,
+                  "src": "2478:15:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 32765,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2478:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32768,
+                  "mutability": "mutable",
+                  "name": "input",
+                  "nameLocation": "2518:5:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32777,
+                  "src": "2503:20:30",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 32767,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2503:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32770,
+                  "mutability": "mutable",
+                  "name": "callbackContract",
+                  "nameLocation": "2541:16:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32777,
+                  "src": "2533:24:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  },
+                  "typeName": {
+                    "id": 32769,
+                    "name": "address",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2533:7:30",
+                    "stateMutability": "nonpayable",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address",
+                      "typeString": "address"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32772,
+                  "mutability": "mutable",
+                  "name": "functionSelector",
+                  "nameLocation": "2574:16:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32777,
+                  "src": "2567:23:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes4",
+                    "typeString": "bytes4"
+                  },
+                  "typeName": {
+                    "id": 32771,
+                    "name": "bytes4",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2567:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes4",
+                      "typeString": "bytes4"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32774,
+                  "mutability": "mutable",
+                  "name": "gasLimit",
+                  "nameLocation": "2607:8:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32777,
+                  "src": "2600:15:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint64",
+                    "typeString": "uint64"
+                  },
+                  "typeName": {
+                    "id": 32773,
+                    "name": "uint64",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2600:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint64",
+                      "typeString": "uint64"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2468:153:30"
+            },
+            "returnParameters": {
+              "id": 32776,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "2630:0:30"
+            },
+            "scope": 32809,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 32790,
+            "nodeType": "FunctionDefinition",
+            "src": "2923:161:30",
+            "nodes": [],
+            "documentation": {
+              "id": 32778,
+              "nodeType": "StructuredDocumentation",
+              "src": "2637:281:30",
+              "text": "@notice Determines if the given authorization is valid for the image ID and journal.\n @dev A (imageId, journal) pair should be valid, and the respective callback authorized, if\n     and only if the journal is the result of the correct execution of the zkVM guest."
+            },
+            "functionSelector": "59611e67",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "callbackIsAuthorized",
+            "nameLocation": "2932:20:30",
+            "parameters": {
+              "id": 32786,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 32780,
+                  "mutability": "mutable",
+                  "name": "imageId",
+                  "nameLocation": "2961:7:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32790,
+                  "src": "2953:15:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes32",
+                    "typeString": "bytes32"
+                  },
+                  "typeName": {
+                    "id": 32779,
+                    "name": "bytes32",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2953:7:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes32",
+                      "typeString": "bytes32"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32782,
+                  "mutability": "mutable",
+                  "name": "journal",
+                  "nameLocation": "2985:7:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32790,
+                  "src": "2970:22:30",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_calldata_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 32781,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "2970:5:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 32785,
+                  "mutability": "mutable",
+                  "name": "auth",
+                  "nameLocation": "3025:4:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32790,
+                  "src": "2994:35:30",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_CallbackAuthorization_$32733_calldata_ptr",
+                    "typeString": "struct CallbackAuthorization"
+                  },
+                  "typeName": {
+                    "id": 32784,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 32783,
+                      "name": "CallbackAuthorization",
+                      "nameLocations": [
+                        "2994:21:30"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 32733,
+                      "src": "2994:21:30"
+                    },
+                    "referencedDeclaration": 32733,
+                    "src": "2994:21:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_CallbackAuthorization_$32733_storage_ptr",
+                      "typeString": "struct CallbackAuthorization"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "2952:78:30"
+            },
+            "returnParameters": {
+              "id": 32789,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 32788,
+                  "mutability": "mutable",
+                  "name": "",
+                  "nameLocation": "-1:-1:-1",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32790,
+                  "src": "3078:4:30",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bool",
+                    "typeString": "bool"
+                  },
+                  "typeName": {
+                    "id": 32787,
+                    "name": "bool",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "3078:4:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bool",
+                      "typeString": "bool"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3077:6:30"
+            },
+            "scope": 32809,
+            "stateMutability": "view",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 32801,
+            "nodeType": "FunctionDefinition",
+            "src": "3433:107:30",
+            "nodes": [],
+            "documentation": {
+              "id": 32791,
+              "nodeType": "StructuredDocumentation",
+              "src": "3090:338:30",
+              "text": "@notice Submit a batch of callbacks, authorized by an attached SNARK proof.\n @dev This function is usually called by the Bonsai Relay. Note that this function does not\n     revert when one of the inner callbacks reverts.\n @return invocationResults a list of booleans indicated if the calldata succeeded or failed."
+            },
+            "functionSelector": "13ef1412",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "invokeCallbacks",
+            "nameLocation": "3442:15:30",
+            "parameters": {
+              "id": 32796,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 32795,
+                  "mutability": "mutable",
+                  "name": "callbacks",
+                  "nameLocation": "3478:9:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32801,
+                  "src": "3458:29:30",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_struct$_Callback_$32747_calldata_ptr_$dyn_calldata_ptr",
+                    "typeString": "struct Callback[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 32793,
+                      "nodeType": "UserDefinedTypeName",
+                      "pathNode": {
+                        "id": 32792,
+                        "name": "Callback",
+                        "nameLocations": [
+                          "3458:8:30"
+                        ],
+                        "nodeType": "IdentifierPath",
+                        "referencedDeclaration": 32747,
+                        "src": "3458:8:30"
+                      },
+                      "referencedDeclaration": 32747,
+                      "src": "3458:8:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_struct$_Callback_$32747_storage_ptr",
+                        "typeString": "struct Callback"
+                      }
+                    },
+                    "id": 32794,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3458:10:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_struct$_Callback_$32747_storage_$dyn_storage_ptr",
+                      "typeString": "struct Callback[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3457:31:30"
+            },
+            "returnParameters": {
+              "id": 32800,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 32799,
+                  "mutability": "mutable",
+                  "name": "invocationResults",
+                  "nameLocation": "3521:17:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32801,
+                  "src": "3507:31:30",
+                  "stateVariable": false,
+                  "storageLocation": "memory",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_array$_t_bool_$dyn_memory_ptr",
+                    "typeString": "bool[]"
+                  },
+                  "typeName": {
+                    "baseType": {
+                      "id": 32797,
+                      "name": "bool",
+                      "nodeType": "ElementaryTypeName",
+                      "src": "3507:4:30",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_bool",
+                        "typeString": "bool"
+                      }
+                    },
+                    "id": 32798,
+                    "nodeType": "ArrayTypeName",
+                    "src": "3507:6:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_array$_t_bool_$dyn_storage_ptr",
+                      "typeString": "bool[]"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3506:33:30"
+            },
+            "scope": 32809,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "id": 32808,
+            "nodeType": "FunctionDefinition",
+            "src": "3738:61:30",
+            "nodes": [],
+            "documentation": {
+              "id": 32802,
+              "nodeType": "StructuredDocumentation",
+              "src": "3546:187:30",
+              "text": "@notice Submit a single callback, authorized by an attached SNARK proof.\n @dev This function is usually called by the Bonsai Relay. This function reverts if the callback fails."
+            },
+            "functionSelector": "83a19d39",
+            "implemented": false,
+            "kind": "function",
+            "modifiers": [],
+            "name": "invokeCallback",
+            "nameLocation": "3747:14:30",
+            "parameters": {
+              "id": 32806,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 32805,
+                  "mutability": "mutable",
+                  "name": "callback",
+                  "nameLocation": "3780:8:30",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 32808,
+                  "src": "3762:26:30",
+                  "stateVariable": false,
+                  "storageLocation": "calldata",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_struct$_Callback_$32747_calldata_ptr",
+                    "typeString": "struct Callback"
+                  },
+                  "typeName": {
+                    "id": 32804,
+                    "nodeType": "UserDefinedTypeName",
+                    "pathNode": {
+                      "id": 32803,
+                      "name": "Callback",
+                      "nameLocations": [
+                        "3762:8:30"
+                      ],
+                      "nodeType": "IdentifierPath",
+                      "referencedDeclaration": 32747,
+                      "src": "3762:8:30"
+                    },
+                    "referencedDeclaration": 32747,
+                    "src": "3762:8:30",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_struct$_Callback_$32747_storage_ptr",
+                      "typeString": "struct Callback"
+                    }
+                  },
+                  "visibility": "internal"
+                }
+              ],
+              "src": "3761:28:30"
+            },
+            "returnParameters": {
+              "id": 32807,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "3798:0:30"
+            },
+            "scope": 32809,
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "external"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "IBonsaiRelay",
+        "contractDependencies": [],
+        "contractKind": "interface",
+        "documentation": {
+          "id": 32748,
+          "nodeType": "StructuredDocumentation",
+          "src": "1842:56:30",
+          "text": "@notice The interface for the Bonsai relay contract"
+        },
+        "fullyImplemented": false,
+        "linearizedBaseContracts": [
+          32809
+        ],
+        "name": "IBonsaiRelay",
+        "nameLocation": "1908:12:30",
+        "scope": 32810,
+        "usedErrors": [],
+        "usedEvents": [
+          32763
+        ]
+      }
+    ],
+    "license": "Apache-2.0"
+  },
+  "id": 30
+}

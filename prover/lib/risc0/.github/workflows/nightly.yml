@@ -1,0 +1,91 @@
+name: Nightly Tasks
+
+on:
+  schedule:
+    - cron: '0 7 * * *' # Nightly (ish) Pacific
+  workflow_dispatch:
+    inputs:
+      crate_count:
+        description: 'How many crates (sorted by downloads) to test'
+        default: 100
+
+env:
+  RISC0_BUILD_LOCKED: 1
+  RISC0_TOOLCHAIN_VERSION: test-release-2
+
+jobs:
+  crates_validate:
+    runs-on: [self-hosted, prod, Linux, cpu]
+    env:
+      RUST_BACKTRACE: full
+      RUST_LOG: info
+    steps:
+      # This is a workaround from: https://github.com/actions/checkout/issues/590#issuecomment-970586842
+      - run: "git checkout -f $(git -c user.name=x -c user.email=x@x commit-tree $(git hash-object -t tree /dev/null) < /dev/null) || :"
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/rustup
+      - name: Set the variables
+        env:
+          DEFAULT_CRATE_COUNT: 1000
+        run: echo "TOP_N_CRATES=${{ github.event.inputs.crate_count || env.DEFAULT_CRATE_COUNT }}" >> $GITHUB_ENV
+
+      - run: cargo install --force --path risc0/cargo-risczero
+
+      - run: cargo run --bin cargo-risczero -- risczero install --version $RISC0_TOOLCHAIN_VERSION
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: cargo build --release
+        working-directory: tools/crates-validator/
+
+      - name: Create working directory
+        run: mkdir -p ${{ runner.temp }}/crate-validation/
+
+      - name: Generate the profile
+        run: |
+          target/release/gen-profiles \
+          -P ${{ github.workspace }}/tools/crates-validator/profiles/config.yaml \
+          -o ${{ runner.temp }}/crate-validation/profiles.yaml \
+          -c $TOP_N_CRATES
+        working-directory: tools/crates-validator/
+
+      - name: Validate profiles
+        run: |
+          target/release/main \
+          -p ${{ github.workspace }} \
+          -P ${{ runner.temp }}/crate-validation/profiles.yaml \
+          -o ${{ runner.temp }}/crate-validation/profile-results.json &> ${{ runner.temp }}/crate-validation/crate-results.log
+        shell: bash
+        working-directory: tools/crates-validator/
+
+      - name: Delete input profile
+        run: rm ${{ runner.temp }}/crate-validation/profiles.yaml
+
+      - run: tail -n 1 ${{ runner.temp }}/crate-validation/crate-results.log
+
+      - name: Upload artifact results
+        uses: actions/upload-artifact@v3
+        if: always() # upload all artifacts even on failures
+        with:
+          name: crates-test-results
+          path: ${{ runner.temp }}/crate-validation/
+          retention-days: 2
+
+      - name: Commit results to risc0/ghpages
+        run: |
+          git clone "https://x-access-token:${{ secrets.BENCHMARK_TOKEN }}@github.com/risc0/ghpages.git" ${{ runner.temp }}/benchmarks/
+          cd ${{ runner.temp }}/benchmarks/
+
+          mkdir -p ./dev/crate-validation/results
+          cp ${{ runner.temp }}/crate-validation/profile-results.json ./dev/crate-validation/results/${{ github.sha }}.json
+
+          [ ! -f ./dev/crate-validation/results/index.json ] && touch ./dev/crate-validation/results/index.json
+          grep -ohE '{\s*"timestamp":\s*\d+\s*,\s*"hash":\s*"[a-zA-Z0-9]+"\s*}' ./dev/crate-validation/results/index.json |\
+          awk -v timestamp="$(date +%s)" -v hash="${{ github.sha }}" \
+          'BEGIN{print "["} {print $0","} END{print "{\"timestamp\":"timestamp", \"hash\":\""hash"\"}" "\n]"}' |\
+          tr -d '[:space:]' | tee ./dev/crate-validation/results/index.json
+
+          git add .
+          git  -c "user.name=nightly-action" -c "user.email=github@users.noreply.github.com" commit -m "Added update at '$(date)'"
+          git push origin main
+        shell: bash
