@@ -7,32 +7,31 @@
 
 import React, {useEffect, useState} from 'react';
 
-import {MMKVLoader} from 'react-native-mmkv-storage';
-import {ethers} from 'ethers';
+import { MMKVLoader } from "react-native-mmkv-storage";
 
-import {SafeAreaView} from 'react-native';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import AttestationCamera from './src/components/AttestationCamera';
+import "react-native-get-random-values";
+import "@ethersproject/shims";
+import { ethers } from "ethers";
+
+import { SafeAreaView } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import AttestationCamera from "./src/components/AttestationCamera";
 
 const MMKV = new MMKVLoader().withEncryption().initialize();
 
 function App(): React.JSX.Element {
-  const [deviceWallet, setDeviceWallet] = useState<ethers.HDNodeWallet | null>(
-    null,
-  );
+  const [deviceWallet, setDeviceWallet] = useState<ethers.Wallet | null>(null);
 
   useEffect(() => {
     (async () => {
-      let phrase = await MMKV.getStringAsync('devicePhrase');
+      let phrase = await MMKV.getStringAsync("devicePhrase");
 
       if (!phrase) {
-        const wallet = ethers.HDNodeWallet.createRandom();
-        await MMKV.setStringAsync('devicePhrase', wallet.mnemonic?.phrase!);
+        const wallet = ethers.Wallet.createRandom();
+        await MMKV.setStringAsync("devicePhrase", wallet.mnemonic?.phrase!);
         setDeviceWallet(wallet);
       } else {
-        const wallet = ethers.HDNodeWallet.fromMnemonic(
-          ethers.Mnemonic.fromPhrase(phrase),
-        );
+        const wallet = ethers.Wallet.fromMnemonic(phrase);
         setDeviceWallet(wallet);
       }
     })();
