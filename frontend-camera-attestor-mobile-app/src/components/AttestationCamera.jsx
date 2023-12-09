@@ -4,6 +4,7 @@ import { PermissionsAndroid } from "react-native";
 
 import "react-native-get-random-values";
 import "@ethersproject/shims";
+import lighthouse from "@lighthouse-web3/sdk";
 
 import { launchCamera } from "react-native-image-picker";
 import Geolocation from "react-native-geolocation-service";
@@ -12,6 +13,8 @@ import { Button, Input, Text } from "@rneui/base";
 import axios from "axios";
 import { ImageContext } from "../context/imageContext";
 import PAGE_VALUES from "../constants/pagevalues";
+
+import { LIGHTHOUSE_API_KEY } from "@env";
 
 async function requestLocationPermission() {
   try {
@@ -55,8 +58,17 @@ const AttestationCamera = ({ deviceWallet, setPage }) => {
 
       setUri(uri);
       setBase64(base64);
-
       console.log("BASE64", base64);
+
+      // upload to lighthouse
+      const {
+        data: { Hash: ipfsHash },
+      } = await lighthouse.uploadText(
+        JSON.stringify({ base64 }),
+        LIGHTHOUSE_API_KEY
+      );
+
+      console.log("IPFS HASH", ipfsHash);
 
       console.log("DEVICE WALLET", deviceWallet);
 
@@ -72,8 +84,8 @@ const AttestationCamera = ({ deviceWallet, setPage }) => {
             axios
               .post(bonsaiUrl, {
                 uuid: "",
-                previousContent: base64,
-                updatedContent: base64,
+                previousContent: ipfsHash,
+                updatedContent: ipfsHash,
                 proof: "",
                 operation: "capture",
               })

@@ -2,9 +2,12 @@ import React from "react";
 import { Image, View } from "react-native";
 import { Button, Text } from "@rneui/base";
 import axios from "axios";
+import lighthouse from "@lighthouse-web3/sdk";
 
 import { ImageContext } from "../context/imageContext";
 import PAGE_VALUES from "../constants/pagevalues";
+
+import { LIGHTHOUSE_API_KEY } from "@env";
 
 const IMAGE_OPEARTIONS = {
   INVERT_COLOR: "invert",
@@ -23,10 +26,18 @@ const ImageEditor = ({ setPage }) => {
 
     if (!base64 || !uuid) return;
 
+    // upload to lighthouse
+    const {
+      data: { Hash: ipfsHash },
+    } = await lighthouse.uploadText(
+      JSON.stringify({ base64 }),
+      LIGHTHOUSE_API_KEY
+    );
+
     const response = await axios.post(bonsaiUrl, {
       uuid,
-      previousContent: base64,
-      updatedContent: base64,
+      previousContent: ipfsHash,
+      updatedContent: ipfsHash,
       proof: "",
       operation,
     });
