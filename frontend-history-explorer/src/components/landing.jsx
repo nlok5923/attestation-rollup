@@ -13,16 +13,18 @@ export function Landing({props}) {
 
   console.log('props', props)
   const fetchData = async () => {
-    const baseURI = "http://localhost:3000"
+    const baseURI = "http://localhost:3000";
+    
     const historyResp = await axios.get(baseURI);
     console.log('history', historyResp)
-    console.log('uuid', props.id)
-    const filter = historyResp.data.contentState.filter((item) => item.uuid === uuid || item.uuid === props.id);
+    const filter = historyResp.data.contentState.filter(
+      (item) => item.uuid === uuid || item.uuid === props?.id
+    );
     setData([...filter]);
   };
     useEffect(() => {
     if(props){
-      console.log('uuid', props.id)
+      console.log("uuid", props?.id);
       fetchData()
     }
   }, []); 
@@ -37,10 +39,10 @@ export function Landing({props}) {
             }`}
           >
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-              Welcome to Our Company
+              Welcome to Pixel Police Explorer
             </h1>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-              Enter your query below to start searching
+              Enter image id below to start searching
             </p>
           </div>
           <div
@@ -71,7 +73,9 @@ export function Landing({props}) {
                     />
                   </div>
                   <div className="ml-4 flex flex-col items-start w-[80%]">
-                    <p className="font-semibold text-lg mb-1">{item.operation}</p>
+                    <p className="font-semibold text-lg mb-1">
+                      {item.operation}
+                    </p>
                     <p className="text-gray-600">{item.uuid}</p>
                   </div>
                 </div>
