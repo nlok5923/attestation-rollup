@@ -3,18 +3,29 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { useEffect } from 'react';
+import { withRouter } from 'next/router';
 import axios from "axios";
 
-export function Landing() {
+export function Landing({props}) {
   const [data, setData] = useState([]);
   const [uuid, setUuid] = useState("");
+
+  console.log('props', props)
   const fetchData = async () => {
     const baseURI = "http://localhost:3000"
     const historyResp = await axios.get(baseURI);
     console.log('history', historyResp)
-    const filter = historyResp.data.contentState.filter((item) => item.uuid === uuid);
+    console.log('uuid', props.id)
+    const filter = historyResp.data.contentState.filter((item) => item.uuid === uuid || item.uuid === props.id);
     setData([...filter]);
   };
+    useEffect(() => {
+    if(props){
+      console.log('uuid', props.id)
+      fetchData()
+    }
+  }, []); 
 
   return (
     <section className="w-[100vw] flex justify-center">
@@ -114,3 +125,5 @@ function ArrowDownIcon(props) {
     </svg>
   );
 }
+
+export default withRouter(Landing);
