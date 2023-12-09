@@ -43,9 +43,9 @@ const AttestationCamera = ({ deviceWallet }) => {
       saveToPhotos: false,
       includeBase64: true,
       includeExtra: true,
-      quality: 0.1,
-      maxHeight: 200,
-      maxWidth: 200,
+      quality: 0.5,
+      maxHeight: 400,
+      maxWidth: 400,
     });
 
     if (response.assets) {
