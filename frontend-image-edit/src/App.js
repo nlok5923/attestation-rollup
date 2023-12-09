@@ -6,16 +6,46 @@ import { useState } from "react";
 const { TextArea } = Input;
 
 function App() {
-
-  const [base64, setbase64] = useState("");
+  const [previousImageBase64, setPreviousImageBase64] = useState("");
+  const [updatedImageBase64, setUpdatedImageBase64] = useState("");
 
   return (
     <div className="App">
       <h1> Image Editor</h1>
-     {base64 && <img src={base64} alt="uploaded image" height={200} width={200} />}
-      <TextArea rows={4} placeholder="Enter image base 64 encoding" maxLength={6} />
-      <Button className="upload-btn" type="primary">Upload</Button>
-      <Button>Color Invert</Button>
+
+      {previousImageBase64 && (
+        <div>
+          <h3> Previous Image </h3>
+          <img
+            src={`data:image/gif;base64,` + previousImageBase64}
+            alt="previous"
+            height={200}
+            width={200}
+          />
+        </div>
+      )}
+
+      {updatedImageBase64 && (
+        <div>
+          <h3> Updated Image </h3>
+          <img
+            src={`data:image/gif;base64,` + updatedImageBase64}
+            alt="updated"
+            height={200}
+            width={200}
+          />
+        </div>
+      )}
+      <Input
+        className="txt-area"
+        rows={4}
+        placeholder="Enter image uuid"
+        onChange={(e) => {
+          console.log("Value", e.target.value);
+          setPreviousImageBase64(e.target.value);
+        }}
+      />
+      <Button className="btn">Color Invert</Button>
     </div>
   );
 }

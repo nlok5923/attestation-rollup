@@ -3,7 +3,7 @@
   font-family: "Montserrat";
   width: 50vw;
   margin: auto;
-  margin-top: 30%;
+  margin-top: 10%;
 }
 
 .App-logo {
@@ -44,4 +44,12 @@
 .upload-btn {
   margin-top: 5%;
   margin-right: 5%;
+}
+
+.txt-area {
+  margin-top: 50px;
+}
+
+.btn {
+  margin-top: 5%;
 }
