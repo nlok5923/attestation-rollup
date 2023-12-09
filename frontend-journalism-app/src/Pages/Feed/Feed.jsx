@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Card } from "antd";
 import "./Feed.css";
 
+import img1 from "../../data/img-1.jpeg";
+import img2 from "../../data/img-2.jpeg";
+import img3 from "../../data/img-3.jpeg";
+import img4 from "../../data/img-4.jpeg";
+
 const Feed = () => {
   const [post, setPost] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
@@ -11,24 +16,28 @@ const Feed = () => {
     // const data = await contract.getAllPosts();
     setPost([
       {
-        title: "Dummy Title",
-        content: "Dummy content for the post",
-        image: "",
+        title: "Hackers",
+        content:
+          "A look into the world of ethereum and the role it played in the success of ETH India 2023.",
+        image: img1,
       },
       {
-        title: "Another Dummy Title",
-        content: "Another dummy content for the post",
-        image: "",
+        title: "The venue",
+        content:
+          "A detailed overview of the venue that hosted the grand ETH India 2023 hackathon.",
+        image: img2,
       },
       {
-        title: "Another Dummy Title",
-        content: "Another dummy content for the post",
-        image: "",
+        title: "Close to the finish line",
+        content:
+          "The nail-biting final stages of the ETH India 2023 hackathon and the intensity it brought to the participants.",
+        image: img3,
       },
       {
-        title: "Another Dummy Title",
-        content: "Another dummy content for the post",
-        image: "",
+        title: "ETH India",
+        content:
+          "A comprehensive recap of the highlights and key takeaways from the ETH India 2023 hackathon.",
+        image: img4,
       },
     ]); // Placeholder for fetched data
     setIsLoad(false);
@@ -42,7 +51,6 @@ const Feed = () => {
     <div>
       <div className="bg-gray-100 min-h-screen p-8">
         <div className="text-center mb-12">
-          {/* <h1 className="text-4xl font-bold mb-4">True Journalism App</h1> */}
           <h1
             style={{
               fontSize: "3.25rem",
@@ -51,7 +59,7 @@ const Feed = () => {
               marginBottom: "1rem",
             }}
           >
-            True Journalism App
+            Citizen Journalism App
           </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
