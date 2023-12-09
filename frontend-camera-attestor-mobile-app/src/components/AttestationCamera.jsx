@@ -4,13 +4,14 @@ import { PermissionsAndroid } from "react-native";
 
 import "react-native-get-random-values";
 import "@ethersproject/shims";
-import { v4 as uuid } from "uuid";
 
 import { launchCamera } from "react-native-image-picker";
 import Geolocation from "react-native-geolocation-service";
 import { View } from "react-native";
-import { Button, Image, Input, Text } from "@rneui/base";
+import { Button, Input, Text } from "@rneui/base";
 import axios from "axios";
+import { ImageContext } from "../context/imageContext";
+import PAGE_VALUES from "../constants/pagevalues";
 
 async function requestLocationPermission() {
   try {
@@ -32,26 +33,28 @@ async function requestLocationPermission() {
   }
 }
 
-const AttestationCamera = ({ deviceWallet }) => {
-  const [inputValue, setInputValue] = React.useState("");
-  const [imageUri, setImageUri] = React.useState(null);
+const AttestationCamera = ({ deviceWallet, setPage }) => {
+  const { setUri, setUuid, setBase64, bonsaiUrl, setBonsaiUrl } =
+    React.useContext(ImageContext);
 
   const handleOpenCamera = async () => {
     await requestLocationPermission();
+
     const response = await launchCamera({
       mediaType: "photo",
       saveToPhotos: false,
       includeBase64: true,
       includeExtra: true,
-      quality: 0.5,
-      maxHeight: 400,
-      maxWidth: 400,
+      quality: 0.2,
+      maxHeight: 200,
+      maxWidth: 200,
     });
 
     if (response.assets) {
       const { base64, uri } = response.assets[0];
 
-      setImageUri(uri);
+      setUri(uri);
+      setBase64(base64);
 
       console.log("BASE64", base64);
 
@@ -59,19 +62,32 @@ const AttestationCamera = ({ deviceWallet }) => {
 
       deviceWallet.signMessage(JSON.stringify({ base64 })).then((signature) => {
         console.log("SIGNATURE", signature);
+
         Geolocation.getCurrentPosition(
           (position) => {
             console.log("POSITION", position);
 
-            console.log("INPUT REF", inputValue);
+            console.log("INPUT REF", bonsaiUrl);
 
-            axios.post(inputValue, {
-              uuid: "",
-              previousContent: base64,
-              updatedContent: base64,
-              proof: "",
-              operation: "capture",
-            });
+            axios
+              .post(bonsaiUrl, {
+                uuid: "",
+                previousContent: base64,
+                updatedContent: base64,
+                proof: "",
+                operation: "capture",
+              })
+              .then((response) => {
+                console.log("RESPONSE -> UUID", response.data.uuid);
+                console.log(
+                  "RESPONSE -> UPDATED CONTENT",
+                  response.data.updatedContent
+                );
+
+                setBase64(response.data.updatedContent);
+                setUuid(response.data.uuid);
+                setPage(PAGE_VALUES.editor);
+              });
           },
           (error) => {
             // See error code charts below.
@@ -90,12 +106,27 @@ const AttestationCamera = ({ deviceWallet }) => {
         alignItems: "center",
         justifyContent: "center",
         height: "100%",
+        backgroundColor: "#fff",
       }}
     >
-      <Input value={inputValue} onChangeText={setInputValue} />
-      <Text>Attestation Camera</Text>
-      <Button onPress={handleOpenCamera}>Open Camera</Button>
-      {imageUri && <Image source={{ uri: imageUri }} />}
+      <Text h2>Capture Image</Text>
+
+      <Input value={bonsaiUrl} onChangeText={setBonsaiUrl} />
+
+      <Button
+        title="Dark"
+        buttonStyle={{ backgroundColor: "rgba(39, 39, 39, 1)" }}
+        containerStyle={{
+          width: 200,
+          marginHorizontal: 50,
+          marginVertical: 10,
+          borderRadius: 10,
+        }}
+        titleStyle={{ color: "white", marginHorizontal: 20 }}
+        onPress={handleOpenCamera}
+      >
+        Open Camera
+      </Button>
     </View>
   );
 };

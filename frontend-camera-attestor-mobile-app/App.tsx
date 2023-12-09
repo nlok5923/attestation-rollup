@@ -16,10 +16,15 @@ import { ethers } from "ethers";
 import { SafeAreaView } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import AttestationCamera from "./src/components/AttestationCamera";
+import { Text } from "@rneui/base";
+import ImageEditor from "./src/components/ImageEditor";
+import PAGE_VALUES from "./src/constants/pagevalues";
+import { ImageProvider } from "./src/context/imageContext";
 
 const MMKV = new MMKVLoader().withEncryption().initialize();
 
 function App(): React.JSX.Element {
+  const [page, setPage] = useState<string>(PAGE_VALUES.loading);
   const [deviceWallet, setDeviceWallet] = useState<ethers.Wallet | null>(null);
 
   useEffect(() => {
@@ -34,13 +39,21 @@ function App(): React.JSX.Element {
         const wallet = ethers.Wallet.fromMnemonic(phrase);
         setDeviceWallet(wallet);
       }
+
+      setPage(PAGE_VALUES.camera);
     })();
   }, []);
 
   return (
     <SafeAreaProvider>
       <SafeAreaView>
-        {deviceWallet && <AttestationCamera deviceWallet={deviceWallet} />}
+        <ImageProvider>
+          {page === PAGE_VALUES.loading && <Text>Loading...</Text>}
+          {page === PAGE_VALUES.camera && (
+            <AttestationCamera setPage={setPage} deviceWallet={deviceWallet} />
+          )}
+          {page === PAGE_VALUES.editor && <ImageEditor setPage={setPage} />}
+        </ImageProvider>
       </SafeAreaView>
     </SafeAreaProvider>
   );
