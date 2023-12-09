@@ -299,7 +299,8 @@ app.post("/", async (req: Request, res: Response) => {
   const ack = await actions.submit(newAction);
 
   res.status(201).send({
-    ack
+    ...ack,
+    uuid: newState.uuid 
   });
 });
 

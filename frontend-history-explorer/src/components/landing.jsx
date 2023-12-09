@@ -51,9 +51,9 @@ export function Landing() {
                 <div className="flex items-center mb-4 w-[50vw]">
                   <div className="w-40 h-40 mr-4 ">
                     <img
-                      alt={item.version}
+                      alt={item.operation}
                       className="h-full w-full border border-gray-200 rounded"
-                      src={`data:image/gif;base64,${item.updatedContent}`}
+                      src={`data:image/png;base64,${item.updatedContent}`}
                       style={{
                         objectFit: "cover",
                       }}
