@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useEffect } from 'react';
 import { withRouter } from 'next/router';
+import Image from 'next/image'
 import axios from "axios";
 
 export function Landing({props}) {
@@ -36,11 +37,12 @@ export function Landing({props}) {
               data.length > 0 ? "mt-5" : ""
             }`}
           >
-            <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-              Welcome to Our Company
-            </h1>
+            <div className="flex">
+            <Image src="/pixelpolicelogo.png" alt="Pixel Police" width={100} height={100} />
+            <Image src="/pixelpolice.png" alt="Pixel Police" width={300} height={20} />
+            </div>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-              Enter your query below to start searching
+              Pixel Police Explorer
             </p>
           </div>
           <div
@@ -50,7 +52,7 @@ export function Landing({props}) {
           >
             <Input
               className="focus:(mt-0)"
-              placeholder="Search here..."
+              placeholder="Search by Image Id"
               type="search"
               onChange={(e) => setUuid(e.target.value)}
             />
@@ -71,8 +73,9 @@ export function Landing({props}) {
                     />
                   </div>
                   <div className="ml-4 flex flex-col items-start w-[80%]">
-                    <p className="font-semibold text-lg mb-1">{item.operation}</p>
-                    <p className="text-gray-600">{item.uuid}</p>
+                    <p className="font-semibold text-lg mb-1">Operation: {item.operation}</p>
+                    <p className="text-gray-600">Id:{item.uuid}</p>
+                    <p className="test-gray-600">version: {index+1}</p>
                   </div>
                 </div>
                 {index < data.length - 1 && (
