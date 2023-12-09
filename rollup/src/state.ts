@@ -15,12 +15,13 @@ interface StateTransport {
   currentContentState: StateVariable;
 }
 
-export interface CounterActionInput {
+export interface ContentActionInput {
   uuid: string;
-    operation: string;
-    proof: string;
-    updatedContent: string;
-    previousContent: string;}
+  operation: string;
+  proof: string;
+  updatedContent: string;
+  previousContent: string;
+}
 
 export class ContentRollup extends RollupState<StateVariable, StateTransport> {
   constructor(count: StateVariable) {
@@ -43,10 +44,10 @@ export class ContentRollup extends RollupState<StateVariable, StateTransport> {
   }
 }
 
-export const counterSTF: STF<ContentRollup, CounterActionInput> = {
+export const counterSTF: STF<ContentRollup, ContentActionInput> = {
   identifier: "counterSTF",
 
-  apply(inputs: CounterActionInput, state: ContentRollup): void {
+  apply(inputs: ContentActionInput, state: ContentRollup): void {
     let newState = state.getState();
     state.transport.currentContentState = newState;
   },
