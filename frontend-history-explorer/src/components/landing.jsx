@@ -3,35 +3,17 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import axios from "axios";
 
 export function Landing() {
   const [data, setData] = useState([]);
-  const fetchData = () => {
-    // Fetch data here and update the state
-    // This is just a placeholder data
-    setData([
-      {
-        id: 1,
-        version: "Version 1",
-        image: "",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. adipiscing elit. adipiscing elit. adipiscing elit. ",
-      },
-      {
-        id: 2,
-        version: "Version 2",
-        image: "",
-        description:
-          "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      },
-      {
-        id: 3,
-        version: "Version 3",
-        image: "",
-        description:
-          "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-      },
-    ]);
+  const [uuid, setUuid] = useState("");
+  const fetchData = async () => {
+    const baseURI = "http://localhost:3000"
+    const historyResp = await axios.get(baseURI);
+    console.log('history', historyResp)
+    const filter = historyResp.data.contentState.filter((item) => item.uuid === uuid);
+    setData([...filter]);
   };
 
   return (
@@ -59,6 +41,7 @@ export function Landing() {
               className="focus:(mt-0)"
               placeholder="Search here..."
               type="search"
+              onChange={(e) => setUuid(e.target.value)}
             />
             <Button onClick={fetchData}>Search</Button>
           </div>
@@ -70,15 +53,15 @@ export function Landing() {
                     <img
                       alt={item.version}
                       className="h-full w-full border border-gray-200 rounded"
-                      src={item.image}
+                      src={`data:image/gif;base64,${item.updatedContent}`}
                       style={{
                         objectFit: "cover",
                       }}
                     />
                   </div>
                   <div className="ml-4 flex flex-col items-start w-[80%]">
-                    <p className="font-semibold text-lg mb-1">{item.version}</p>
-                    <p className="text-gray-600">{item.description}</p>
+                    <p className="font-semibold text-lg mb-1">{item.operation}</p>
+                    <p className="text-gray-600">{item.uuid}</p>
                   </div>
                 </div>
                 {index < data.length - 1 && (
