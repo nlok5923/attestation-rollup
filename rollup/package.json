@@ -3,6 +3,7 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
+    "@types/uuid": "^9.0.7",
     "bun-types": "latest"
   },
   "peerDependencies": {
@@ -15,7 +16,9 @@
     "body-parser": "^1.20.2",
     "ethers": "^6.7.1",
     "express": "^4.18.2",
+    "sqlite": "^5.1.1",
     "sqlite3": "^5.1.6",
+    "uuid": "^9.0.1",
     "zod": "3.21.4"
   }
 }

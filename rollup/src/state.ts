@@ -6,6 +6,7 @@ export type ContentState = {
   proof: string
   updatedContent: string
   previousContent: string
+  uuid: string
 }
 
 export type StateVariable = ContentState;
@@ -15,11 +16,13 @@ interface StateTransport {
 }
 
 export interface CounterActionInput {
-  action: "capture" | "invert";
-  contentBase64: string;
-}
+  uuid: string;
+    operation: string;
+    proof: string;
+    updatedContent: string;
+    previousContent: string;}
 
-export class CounterRollup extends RollupState<StateVariable, StateTransport> {
+export class ContentRollup extends RollupState<StateVariable, StateTransport> {
   constructor(count: StateVariable) {
     super(count);
   }
@@ -35,21 +38,16 @@ export class CounterRollup extends RollupState<StateVariable, StateTransport> {
   calculateRoot(): ethers.BytesLike {
     return ethers.solidityPackedKeccak256(
       ["string", "string", "string", "string"],
-      [this.transport.currentContentState]
+      [this.transport.currentContentState.operation,this.transport.currentContentState.operation,this.transport.currentContentState.operation,this.transport.currentContentState.operation]
     );
   }
 }
 
-export const counterSTF: STF<CounterRollup, CounterActionInput> = {
+export const counterSTF: STF<ContentRollup, CounterActionInput> = {
   identifier: "counterSTF",
 
-  apply(inputs: CounterActionInput, state: CounterRollup): void {
+  apply(inputs: CounterActionInput, state: ContentRollup): void {
     let newState = state.getState();
-    // if (inputs.type === "increment") {
-    //   newState += 1;
-    // } else if (inputs.type === "decrement") {
-    //   throw new Error("Not implemented");
-    // }
     state.transport.currentContentState = newState;
   },
 };
