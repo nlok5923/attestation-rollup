@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "antd";
 import "./Feed.css";
+import axios from 'axios'
 
 const Feed = () => {
   const [post, setPost] = useState([]);
+  const [content, setContent] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
+  const [img, setImg] = useState("");
+  const [uuid, setUuid] = useState("");
 
   const _fetchPost = async () => {
     setIsLoad(true);
@@ -34,8 +38,16 @@ const Feed = () => {
     setIsLoad(false);
   };
 
+  const _fetchData = async () => {
+    const data = await axios.get('http://localhost:3000');
+    setContent(data.data);
+    setImg(data.data.contentState[data.data.contentState.length - 1].updatedContent);
+    setUuid(data.data.contentState[data.data.contentState.length - 1].uuid);
+  }
+
   useEffect(() => {
     _fetchPost(); // Fetch data on component mount
+    _fetchData();
   }, []);
 
   return (
@@ -55,6 +67,32 @@ const Feed = () => {
           </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <Card className="w-full">
+                <img
+                  alt=""
+                  className="w-full h-48 object-cover"
+                  height="200"
+                  src={'data:image/png;base64,' + img}
+                  style={{
+                    aspectRatio: "350/200",
+                    objectFit: "cover",
+                  }}
+                  width="350"
+                />
+                <div>
+                  <div className="flex items-center mt-4 mb-2">
+                    <h2 className="text-lg font-semibold">{"Sample image"}</h2>
+                  </div>
+                  <p className="text-gray-600 text-left">{"Sample content"}</p>
+                </div>
+                <div className="flex justify-end mt-6">
+                  <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
+                    View History
+                  </button>
+                </div>
+              </Card>
+
           {post.map(
             (
               item,
