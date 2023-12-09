@@ -327,7 +327,8 @@ app.post("/", async (req: Request, res: Response) => {
 
   res.status(201).send({
     ...ack,
-    uuid: newState.uuid 
+    uuid: newState.uuid,
+    updatedContent: newState.updatedContent,
   });
 });
 
