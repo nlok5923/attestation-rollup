@@ -64,6 +64,7 @@ function App() {
           style={{ fontSize: "1rem" }}
         />
         <Button
+          size="large"
           style={{
             background: "#2066ff",
             color: "#fff",
