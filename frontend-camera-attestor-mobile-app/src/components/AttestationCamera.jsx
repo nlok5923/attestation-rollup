@@ -33,7 +33,7 @@ async function requestLocationPermission() {
 }
 
 const AttestationCamera = ({ deviceWallet }) => {
-  const inputRef = React.useRef(null);
+  const [inputValue, setInputValue] = React.useState("");
   const [imageUri, setImageUri] = React.useState(null);
 
   const handleOpenCamera = async () => {
@@ -63,7 +63,9 @@ const AttestationCamera = ({ deviceWallet }) => {
           (position) => {
             console.log("POSITION", position);
 
-            axios.post(inputRef.current.value, {
+            console.log("INPUT REF", inputValue);
+
+            axios.post(inputValue, {
               uuid: uuid(),
               previousContent: base64,
               updatedContent: base64,
@@ -90,7 +92,7 @@ const AttestationCamera = ({ deviceWallet }) => {
         height: "100%",
       }}
     >
-      <Input ref={inputRef} />
+      <Input value={inputValue} onChangeText={setInputValue} />
       <Text>Attestation Camera</Text>
       <Button onPress={handleOpenCamera}>Open Camera</Button>
       {imageUri && <Image source={{ uri: imageUri }} />}
