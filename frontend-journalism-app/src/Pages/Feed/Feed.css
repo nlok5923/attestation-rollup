@@ -1,8 +1,9 @@
 .feed {
-    margin-top: 5vh;
-    margin-left: 50vh;
+    /* margin-top: 5vh; */
+    /* margin-left: 50vh; */
 }
 
 .card {
+    margin: auto;
     margin-top: 3vh;
 }
