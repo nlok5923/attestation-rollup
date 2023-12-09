@@ -2,11 +2,11 @@ import { RollupState, STF } from "@stackr/stackr-js/execution";
 import { ethers } from "ethers";
 
 export type ContentState = {
-  operation: string
-  proof: string
+  uuid: string
   updatedContent: string
   previousContent: string
-  uuid: string
+  proof: string
+  operation: string
 }
 
 export type StateVariable = ContentState;
@@ -16,11 +16,11 @@ interface StateTransport {
 }
 
 export interface ContentActionInput {
-  uuid: string;
-  operation: string;
-  proof: string;
-  updatedContent: string;
-  previousContent: string;
+  uuid: string
+  updatedContent: string
+  previousContent: string
+  proof: string
+  operation: string
 }
 
 export class ContentRollup extends RollupState<StateVariable, StateTransport> {
