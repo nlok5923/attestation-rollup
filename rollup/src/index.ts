@@ -252,14 +252,14 @@ app.post("/", async (req: Request, res: Response) => {
       updatedContent: filteredBase64,
       previousContent: currentContentState.updatedContent,
       proof: '',
-      operation: 'invert'
+      operation: operation
     })
     newState = {
       uuid,
       updatedContent: filteredBase64,
       previousContent: currentContentState.updatedContent,
       proof: '',
-      operation: 'invert'
+      operation: operation
     };
   } else {
     let newUUID = uuidv4();
