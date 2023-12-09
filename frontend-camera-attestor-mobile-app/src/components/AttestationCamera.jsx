@@ -66,11 +66,11 @@ const AttestationCamera = ({ deviceWallet }) => {
             console.log("INPUT REF", inputValue);
 
             axios.post(inputValue, {
-              uuid: uuid(),
+              uuid: "",
               previousContent: base64,
               updatedContent: base64,
               proof: "",
-              operation: "CAPTURE",
+              operation: "capture",
             });
           },
           (error) => {
