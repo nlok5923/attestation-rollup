@@ -176,3 +176,5 @@ dist
 
 datastore
 build
+
+.npmrc
