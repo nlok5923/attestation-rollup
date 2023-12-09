@@ -65,6 +65,9 @@ const actionSchemaType = {
 const actionInput = new ActionSchema("edit-content", actionSchemaType);
 
 const INVERT_IMAGE_ID = 'f2b06c4b1504ed5a3d76783de77de55c0dbb0bc46ad726881cf07756d84919f5'
+const FLIP_IMAGE_ID = '32d70f34c6cac941b936bae6bbb130489ded4972f95dcd6564e1d0228011941';
+const INC_BRIGHTNESS_ID = '67d08c274d80d2c40891baeb9ab4f50ad5c4fedba5593da67fcd238d151ddda1';
+const DEC_BRIGHTNESS_ID = '9fa78f5b15e3cfcd6e96e9a5bdff8515fe4633a72c88e7e2932368434afc5d21';
 
 const rollup = async () => {
   const uri = ''
@@ -152,6 +155,18 @@ app.post("/", async (req: Request, res: Response) => {
 
   if(uuid) {
 
+    let imageId = "";
+
+    if(operation === 'invert') {
+      imageId = INVERT_IMAGE_ID;
+    } else if (operation === 'flip') {
+      imageId = FLIP_IMAGE_ID;
+    } else if (operation === 'decrease_brightness') {
+      imageId = DEC_BRIGHTNESS_ID;
+    } else if (operation === 'increase_brightness') {
+      imageId = INC_BRIGHTNESS_ID;
+    }
+
     const inputUploadResponse = await axiosInstance.get(INPUT_UPLOAD_URL_ROUTE)
     const inputUUID = inputUploadResponse.data.uuid;
 
@@ -173,7 +188,7 @@ app.post("/", async (req: Request, res: Response) => {
     const submitInputResponse = await axiosInstance.request(config);
   
     let snarkCreationData = JSON.stringify({
-      "img": INVERT_IMAGE_ID,
+      "img": imageId,
       "input": inputUUID
     });
     
@@ -190,9 +205,6 @@ app.post("/", async (req: Request, res: Response) => {
     
     const snarkCreationResponse = await axiosInstance.request(config);
     const snarkCreationSessionId = snarkCreationResponse.data.uuid;
-  
-    // console.log("Creationg response ", snarkCreationResponse);
-    // console.log("Snark session id", snarkCreationSessionId);
     
     await sleep(4000); // waiting for 4 seconds
   
