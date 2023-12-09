@@ -65,9 +65,9 @@ const actionSchemaType = {
 };
 const actionInput = new ActionSchema("edit-content", actionSchemaType);
 
-const INVERT_IMAGE_ID = 'f2b06c4b1504ed5a3d76783de77de55c0dbb0bc46ad726881cf07756d84919f5'
-const DEC_BRIGHTNESS_ID = '32d70f34c6cac941b936bae6bbb130489ded4972f95dcd6564e1d02280119412';
-const FLIP_IMAGE_ID = '67d08c274d80d2c40891baeb9ab4f50ad5c4fedba5593da67fcd238d151ddda1';
+const INVERT_IMAGE_ID = '8113a3650b0e00529d8d84556dfc795a2dc3872f94fd8935e290dfec6c650c7b'
+const DEC_BRIGHTNESS_ID = 'ac0b27ce5bf0a09e2137f6a45618cd5e5ad30108b9eda1dee15ebb5f729ca959';
+const FLIP_IMAGE_ID = '968b90cb226691c8deb2e2ee7f46577ca7ddc1434984f180d6ae385531ad7544';
 const INC_BRIGHTNESS_ID = '9fa78f5b15e3cfcd6e96e9a5bdff8515fe4633a72c88e7e2932368434afc5d21';
 
 const rollup = async () => {
