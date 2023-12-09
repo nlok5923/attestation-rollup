@@ -1,15 +1,16 @@
 /* eslint-disable react-native/no-inline-styles */
-import React from 'react';
+import React from "react";
 import { PermissionsAndroid } from "react-native";
 
 import "react-native-get-random-values";
 import "@ethersproject/shims";
-import { ethers } from "ethers";
+import { v4 as uuid } from "uuid";
 
 import { launchCamera } from "react-native-image-picker";
 import Geolocation from "react-native-geolocation-service";
 import { View } from "react-native";
-import { Button, Image, Text } from "@rneui/base";
+import { Button, Image, Input, Text } from "@rneui/base";
+import axios from "axios";
 
 async function requestLocationPermission() {
   try {
@@ -31,12 +32,9 @@ async function requestLocationPermission() {
   }
 }
 
-const AttestationCamera = ({
-  deviceWallet,
-}: {
-  deviceWallet: ethers.Wallet;
-}) => {
-  const [imageUri, setImageUri] = React.useState<string | null>(null);
+const AttestationCamera = ({ deviceWallet }) => {
+  const inputRef = React.useRef(null);
+  const [imageUri, setImageUri] = React.useState(null);
 
   const handleOpenCamera = async () => {
     await requestLocationPermission();
@@ -53,7 +51,7 @@ const AttestationCamera = ({
     if (response.assets) {
       const { base64, uri } = response.assets[0];
 
-      setImageUri(uri!);
+      setImageUri(uri);
 
       console.log("BASE64", base64);
 
@@ -61,19 +59,25 @@ const AttestationCamera = ({
 
       deviceWallet.signMessage(JSON.stringify({ base64 })).then((signature) => {
         console.log("SIGNATURE", signature);
-        // Geolocation.getCurrentPosition(
-        //   (position) => {
-        //     console.log("POSITION", position);
-        //     // call the API
-        //   },
-        //   (error) => {
-        //     // See error code charts below.
-        //     console.log(error.code, error.message);
-        //   },
-        //   { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-        // );
-      });
+        Geolocation.getCurrentPosition(
+          (position) => {
+            console.log("POSITION", position);
 
+            axios.post(inputRef.current.value, {
+              uuid: uuid(),
+              previousContent: base64,
+              updatedContent: base64,
+              proof: "",
+              operation: "CAPTURE",
+            });
+          },
+          (error) => {
+            // See error code charts below.
+            console.log(error.code, error.message);
+          },
+          { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+        );
+      });
     }
   };
 
@@ -86,9 +90,10 @@ const AttestationCamera = ({
         height: "100%",
       }}
     >
+      <Input ref={inputRef} />
       <Text>Attestation Camera</Text>
       <Button onPress={handleOpenCamera}>Open Camera</Button>
-      {imageUri && <Image source={{ uri: imageUri! }} />}
+      {imageUri && <Image source={{ uri: imageUri }} />}
     </View>
   );
 };
