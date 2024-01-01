@@ -52,7 +52,7 @@ Scroll Sepolia: 0x534701c017Fd02F8ecD128D6175cE88e1A4871b3
 OKX Testnet: 0x57D8C4870EDa80eD667d27f124226581B9822267
 
 ```
-## How to run this rollup
+## Running Pixel Police (Locally)
 
 - Setup the rollup rpc server by following the steps from [here](https://github.com/nlok5923/attestation-rollup/tree/develop/rollup#setting-up-rollup-rpc). Make sure to save the `ngork` port forwarded url as you'll need it.
 - Run the prover. Steps to run [here](https://github.com/nlok5923/attestation-rollup/blob/develop/prover/README.md#setting-up-prover)
