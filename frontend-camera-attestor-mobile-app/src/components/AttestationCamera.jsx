@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from "react";
-import { PermissionsAndroid } from "react-native";
+import { Image, PermissionsAndroid } from "react-native";
 
 import "react-native-get-random-values";
 import "@ethersproject/shims";
@@ -34,7 +34,7 @@ async function requestLocationPermission() {
 }
 
 const AttestationCamera = ({ deviceWallet, setPage }) => {
-  const { setUri, setUuid, setBase64, bonsaiUrl, setBonsaiUrl } =
+  const { setUri, setUuid, setBase64, rollupUrl } =
     React.useContext(ImageContext);
 
   const handleOpenCamera = async () => {
@@ -67,10 +67,10 @@ const AttestationCamera = ({ deviceWallet, setPage }) => {
           (position) => {
             console.log("POSITION", position);
 
-            console.log("INPUT REF", bonsaiUrl);
+            console.log("ROLLUP URL", rollupUrl);
 
             axios
-              .post(bonsaiUrl, {
+              .post(rollupUrl, {
                 uuid: "",
                 previousContent: base64,
                 updatedContent: base64,
@@ -109,9 +109,9 @@ const AttestationCamera = ({ deviceWallet, setPage }) => {
         backgroundColor: "#fff",
       }}
     >
-      <Text h2>Capture Image</Text>
+      <Text h1>PixelPolice</Text>
 
-      <Input value={bonsaiUrl} onChangeText={setBonsaiUrl} />
+      <Image source={require("../assets/logo.png")} />
 
       <Button
         title="Dark"

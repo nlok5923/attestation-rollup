@@ -14,7 +14,7 @@ const IMAGE_OPEARTIONS = {
 };
 
 const ImageEditor = ({ setPage }) => {
-  const { uri, uuid, base64, bonsaiUrl, setBase64 } =
+  const { uri, uuid, base64, rollupUrl, setBase64 } =
     React.useContext(ImageContext);
 
   const handleImageOperation = async (operation) => {
@@ -23,7 +23,7 @@ const ImageEditor = ({ setPage }) => {
 
     if (!base64 || !uuid) return;
 
-    const response = await axios.post(bonsaiUrl, {
+    const response = await axios.post(rollupUrl, {
       uuid,
       previousContent: base64,
       updatedContent: base64,
@@ -49,13 +49,13 @@ const ImageEditor = ({ setPage }) => {
         backgroundColor: "#fff",
       }}
     >
-      <Text h2 style={{ margin: "0 0 40px 0" }}>
-        Edit Image
+      <Text h2 h2style={{ margin: "0 0 40px 0" }}>
+        Adjust
       </Text>
 
       {base64 && (
         <Image
-          style={{ height: 300, width: 350 }}
+          style={{ height: 200, width: 250, borderRadius: 10 }}
           source={{ uri: `data:image/jpeg;base64,${base64}` }}
         />
       )}
@@ -81,6 +81,7 @@ const ImageEditor = ({ setPage }) => {
         >
           Grayscale
         </Button>
+
         <Button
           title="Dark"
           buttonStyle={{ backgroundColor: "rgba(39, 39, 39, 1)" }}
@@ -97,6 +98,7 @@ const ImageEditor = ({ setPage }) => {
         >
           Increase Brightness
         </Button>
+
         <Button
           title="Dark"
           buttonStyle={{ backgroundColor: "rgba(39, 39, 39, 1)" }}
@@ -113,6 +115,7 @@ const ImageEditor = ({ setPage }) => {
         >
           Decrease Brightness
         </Button>
+
         <Button
           title="Dark"
           buttonStyle={{ backgroundColor: "rgba(39, 39, 39, 1)" }}
@@ -129,14 +132,21 @@ const ImageEditor = ({ setPage }) => {
         </Button>
       </View>
 
-      <Button
-        style={{ marginTop: 40, borderRadius: 10 }}
-        onPress={() => {
-          setPage(PAGE_VALUES.camera);
-        }}
-      >
-        Back
-      </Button>
+      <View>
+        <Button
+          style={{ marginTop: 40 }}
+          containerStyle={{
+            borderRadius: 10,
+            marginTop: 40,
+          }}
+          onPress={() => {
+            // TODO: Add share logic here
+            setPage(PAGE_VALUES.camera);
+          }}
+        >
+          Share
+        </Button>
+      </View>
     </View>
   );
 };
