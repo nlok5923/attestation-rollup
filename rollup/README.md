@@ -5,6 +5,7 @@ To run/install dependencies you need to install bun as we are using `bun` here a
 - Install bun by this command `curl -fsSL https://bun.sh/install | bash`
 - Install dependencies using `bun install`
 - Start the rollup rpc server using `bun run src/index.ts`
+- Please make sure it runs on port `:3000`
 
 Now you need to tunnel this local server to a global server route using `ngork`
 
