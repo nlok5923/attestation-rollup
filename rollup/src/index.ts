@@ -1,9 +1,9 @@
-import { ActionSchema, FIFOStrategy, MicroRollup } from "@stackr/stackr-js";
+// import { ActionSchema, FIFOStrategy, MicroRollup } from "@stackr/stackr-js";
 import bodyParser from "body-parser";
 import express, { Request, Response } from "express";
-import { stackrConfig } from "../stackr.config";
-import { ContentRollup, counterSTF } from "./state";
-import { StateMachine } from "@stackr/stackr-js/execution";
+// import { stackrConfig } from "../stackr.config";
+// import { ContentRollup, counterSTF } from "./state";
+// import { StateMachine } from "@stackr/stackr-js/execution";
 import axios from "axios";
 import { v4 as uuidv4 } from 'uuid';
 import { ethers } from "ethers";
@@ -13,7 +13,7 @@ import cors from 'cors'
 import * as genesisState from "../genesis-state.json";
 import ts from "typescript";
 
-const BASE_URL = 'http://127.0.0.1:8081';
+const BASE_URL = 'http://127.0.0.1:8081'; // this is where prover (RiscZero) is running 
 const INPUT_UPLOAD_URL_ROUTE = '/inputs/upload';
 const INPUTS_ROUTE = '/inputs';
 const SESSION_CREATE_ROUTE = '/sessions/create';
@@ -56,39 +56,40 @@ const filterBase64Noise = (base64String: string) => {
   return base64String.substring(startIndex);
 }
 
-const actionSchemaType = {
-  uuid: "String",
-  operation: "String",
-  proof: "String",
-  updatedContent: "String",
-  previousContent: "String"
-};
-const actionInput = new ActionSchema("edit-content", actionSchemaType);
+// const actionSchemaType = {
+//   uuid: "String",
+//   operation: "String",
+//   proof: "String",
+//   updatedContent: "String",
+//   previousContent: "String"
+// };
+// const actionInput = new ActionSchema("edit-content", actionSchemaType);
 
+// Image Id corresponding to the operation defined 
 const INVERT_IMAGE_ID = 'f2b06c4b1504ed5a3d76783de77de55c0dbb0bc46ad726881cf07756d84919f5'
 const DEC_BRIGHTNESS_ID = '32d70f34c6cac941b936bae6bbb130489ded4972f95dcd6564e1d02280119412';
 const FLIP_IMAGE_ID = '67d08c274d80d2c40891baeb9ab4f50ad5c4fedba5593da67fcd238d151ddda1';
 const INC_BRIGHTNESS_ID = '9fa78f5b15e3cfcd6e96e9a5bdff8515fe4633a72c88e7e2932368434afc5d21';
 
-const rollup = async () => {
-  const uri = ''
-  const counterFsm = new StateMachine({
-    state: new ContentRollup(genesisState.state),
-    stf: counterSTF,
-  });
+// const rollup = async () => {
+//   const uri = ''
+//   const counterFsm = new StateMachine({
+//     state: new ContentRollup(genesisState.state),
+//     stf: counterSTF,
+//   });
   
-  const buildStrategy = new FIFOStrategy();
+//   const buildStrategy = new FIFOStrategy();
 
-  const { state, actions, events } = await MicroRollup({
-    config: stackrConfig,
-    useState: counterFsm,
-    useAction: actionInput,
-    useBuilder: { strategy: buildStrategy, autorun: true },
-    useSyncer: { autorun: true },
-  });
+//   const { state, actions, events } = await MicroRollup({
+//     config: stackrConfig,
+//     useState: counterFsm,
+//     useAction: actionInput,
+//     useBuilder: { strategy: buildStrategy, autorun: true },
+//     useSyncer: { autorun: true },
+//   });
 
-  return { state, actions };
-};
+//   return { state, actions };
+// };
 
 const app = express();
 app.use(bodyParser.json());
@@ -96,7 +97,7 @@ app.use(cors({
   origin: '*'
 }));
 
-const { actions, state } = await rollup();
+// const { actions, state } = await rollup();
 
 type ContentState = {
   uuid: string,
@@ -116,37 +117,37 @@ app.get("/", (req: Request, res: Response) => {
   res.send({ contentState });
 });
 
-const getData = async (data: any) => {
-  const wallet = ethers.Wallet.createRandom();
+// const getData = async (data: any) => {
+//   const wallet = ethers.Wallet.createRandom();
 
-  const actionSchemaType = {
-    uuid: "String",
-    updatedContent: "String",
-    previousContent: "String",
-    proof: "String",
-    operation: "String",
-  };
+//   const actionSchemaType = {
+//     uuid: "String",
+//     updatedContent: "String",
+//     previousContent: "String",
+//     proof: "String",
+//     operation: "String",
+//   };
 
-  // console.log("actionInput", actionInput);
-  // console.log("data", data)
-  // console.log("types", actionInput.EIP712TypedData.types);  
+//   // console.log("actionInput", actionInput);
+//   // console.log("data", data)
+//   // console.log("types", actionInput.EIP712TypedData.types);  
   
-  const sign = await wallet.signTypedData(
-    stackrConfig.domain,
-    actionInput.EIP712TypedData.types,
-    data
-  );
+//   const sign = await wallet.signTypedData(
+//     stackrConfig.domain,
+//     actionInput.EIP712TypedData.types,
+//     data
+//   );
 
-  const payload = JSON.stringify({
-    msgSender: wallet.address,
-    signature: sign,
-    payload: data,
-  });
+//   const payload = JSON.stringify({
+//     msgSender: wallet.address,
+//     signature: sign,
+//     payload: data,
+//   });
 
-  // console.log(payload);
+//   // console.log(payload);
 
-  return payload;
-};
+//   return payload;
+// };
 
 app.post("/", async (req: Request, res: Response) => {
 
@@ -308,25 +309,25 @@ app.post("/", async (req: Request, res: Response) => {
     }
   };
 
-  const schema = actions.getSchema("edit-content");
+  // const schema = actions.getSchema("edit-content");
 
-  if (!schema) {
-    res.status(400).send({ message: "error" });
-    return;
-  }
+  // if (!schema) {
+  //   res.status(400).send({ message: "error" });
+  //   return;
+  // }
   console.log('New UUID', newState.uuid);
   console.log('Content uuids', contentState.map(content => console.log(uuid)))
 
-  const payload = await getData(newState);
+  // const payload = await getData(newState);
 
   // console.log("This is payload", payload);
   // @ts-ignore
-  const newAction = schema.newAction(JSON.parse(payload));
+  // const newAction = schema.newAction(JSON.parse(payload));
 
-  const ack = await actions.submit(newAction);
+  // const ack = await actions.submit(newAction);
 
   res.status(201).send({
-    ...ack,
+    // ...ack,
     uuid: newState.uuid,
     updatedContent: newState.updatedContent,
   });
