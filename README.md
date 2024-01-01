@@ -59,3 +59,5 @@ OKX Testnet: 0x57D8C4870EDa80eD667d27f124226581B9822267
 - Start the mobile application with which you can capture + edit images by following [this](https://github.com/nlok5923/attestation-rollup/tree/develop/frontend-camera-attestor-mobile-app#readme) steps
 - Start the explorer where you can see the history of images by following [this](https://github.com/nlok5923/attestation-rollup/blob/develop/frontend-history-explorer/README.md) steps
 - To see the edits made on image and it's history at this url http://localhost:3001/:uuid (uuid is the unique identifier generated for every image you can get it from the logs of rollup rpc)
+
+PS: All the image related data is being stored just for your current test session it would be reseted once you restart the rollup rpc server
