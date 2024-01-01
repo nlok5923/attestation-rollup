@@ -1,15 +1,15 @@
-# counter
+# Setting up rollup rpc
 
-To install dependencies:
+To run/install dependencies you need to install bun as we are using `bun` here as a runtime
 
-```bash
-bun install
-```
+- Install bun by this command `curl -fsSL https://bun.sh/install | bash`
+- Install dependencies using `bun install`
+- Start the rollup rpc server using `bun run src/index.ts`
 
-To run:
+Now you need to tunnel this local server to a global server route using `ngork`
 
-```bash
-bun run index.ts
-```
+- You can follow the steps [here](https://ngrok.com/docs/getting-started/) to forward your local port to global port using `ngork`.
+- Update the url received from `ngork` inside the react native project for the Pixel Police application so that the application can start sending all the state transitions request to the rollup rpc.
 
-This project was created using `bun init` in bun v1.0.4. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+
+PS: Please run all this command under `/rollup` directory
