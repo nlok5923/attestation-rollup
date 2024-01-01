@@ -52,3 +52,10 @@ Scroll Sepolia: 0x534701c017Fd02F8ecD128D6175cE88e1A4871b3
 OKX Testnet: 0x57D8C4870EDa80eD667d27f124226581B9822267
 
 ```
+## How to run this rollup
+
+- Setup the rollup rpc server by following the steps from [here](https://github.com/nlok5923/attestation-rollup/tree/develop/rollup). Make sure to save the `ngork` port forwarded url as you'll need it.
+- Run the prover. Steps to run [here](https://github.com/nlok5923/attestation-rollup/blob/develop/prover/README.md)
+- Start the mobile application with which you can capture + edit images by following [this](https://github.com/nlok5923/attestation-rollup/tree/develop/frontend-camera-attestor-mobile-app#readme) steps
+- Start the explorer where you can see the history of images by following [this](https://github.com/nlok5923/attestation-rollup/blob/develop/frontend-history-explorer/README.md) steps
+- To see the edits made on image and it's history at this url http://localhost:3001/:uuid (uuid is the unique identifier generated for every image you can get it from the logs of rollup rpc)
