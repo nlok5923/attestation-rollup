@@ -11,5 +11,6 @@ The Pixel Police mobile app, built with React Native, empowers citizen journalis
 >**Note**: Please make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 1. ``` cd ./frontend-camera-attestor-mobile-app ```
 2. ``` npm i ```
-3. ``` npm start ```
-4. ``` npm run android ```
+3. Replace the rollupUrl value in `./frontend-camera-attestor-mobile-app/src/context/imageContext.js` with the deploy URL of the rollup server. Note: For dev purposes, you can tunnel the localhost URL of the server via a service such as ngrok.
+4. ``` npm start ```
+5. ``` npm run android ```
