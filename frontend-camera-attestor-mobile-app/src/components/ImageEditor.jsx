@@ -5,6 +5,7 @@ import axios from "axios";
 
 import { ImageContext } from "../context/imageContext";
 import PAGE_VALUES from "../constants/pagevalues";
+import CustomButton from "./CustomButton";
 
 const IMAGE_OPEARTIONS = {
   INVERT_COLOR: "invert",
@@ -12,6 +13,29 @@ const IMAGE_OPEARTIONS = {
   DECREASE_BRIGHTNESS: "decrease_brightness",
   FLIP: "flip",
 };
+
+const BUTTON_DATA = [
+  {
+    title: "Invert",
+    operation: IMAGE_OPEARTIONS.INVERT_COLOR,
+    imageSource: require("../assets/invert.png"),
+  },
+  {
+    title: "Increase Brightness",
+    operation: IMAGE_OPEARTIONS.INCREASE_BRIGHTNESS,
+    imageSource: require("../assets/inc-brightness.png"),
+  },
+  {
+    title: "Decrease Brightness",
+    operation: IMAGE_OPEARTIONS.DECREASE_BRIGHTNESS,
+    imageSource: require("../assets/dec-brightness.png"),
+  },
+  {
+    title: "Flip",
+    operation: IMAGE_OPEARTIONS.FLIP,
+    imageSource: require("../assets/vert-flip.png"),
+  },
+];
 
 const ImageEditor = ({ setPage }) => {
   const { uri, uuid, base64, rollupUrl, setBase64 } =
@@ -49,95 +73,35 @@ const ImageEditor = ({ setPage }) => {
         backgroundColor: "#fff",
       }}
     >
-      <Text h2 h2style={{ margin: "0 0 40px 0" }}>
-        Adjust
-      </Text>
-
-      {base64 && (
-        <Image
-          style={{ height: 200, width: 250, borderRadius: 10 }}
-          source={{ uri: `data:image/jpeg;base64,${base64}` }}
-        />
-      )}
-
       <View
         style={{
           display: "flex",
+          flexDirection: "row",
           alignItems: "center",
-          justifyContent: "center",
         }}
       >
         <Button
-          title="Dark"
-          buttonStyle={{ backgroundColor: "rgba(39, 39, 39, 1)" }}
+          buttonStyle={{ backgroundColor: "rgb(255, 255, 255)" }}
           containerStyle={{
-            width: 200,
-            marginHorizontal: 50,
-            marginVertical: 10,
-            borderRadius: 10,
+            width: 40,
           }}
-          titleStyle={{ color: "white", marginHorizontal: 20 }}
-          onPress={() => handleImageOperation(IMAGE_OPEARTIONS.INVERT_COLOR)}
         >
-          Grayscale
+          <Image
+            style={{
+              height: 35,
+              width: 35,
+              backgroundColor: "rgba(1, 1, 1)",
+              borderRadius: 10,
+            }}
+            source={require("../assets/back-arrow.png")}
+          />
         </Button>
 
         <Button
-          title="Dark"
-          buttonStyle={{ backgroundColor: "rgba(39, 39, 39, 1)" }}
-          containerStyle={{
-            width: 200,
-            marginHorizontal: 50,
-            marginVertical: 10,
-            borderRadius: 10,
-          }}
-          titleStyle={{ color: "white", marginHorizontal: 20 }}
-          onPress={() =>
-            handleImageOperation(IMAGE_OPEARTIONS.INCREASE_BRIGHTNESS)
-          }
-        >
-          Increase Brightness
-        </Button>
-
-        <Button
-          title="Dark"
-          buttonStyle={{ backgroundColor: "rgba(39, 39, 39, 1)" }}
-          containerStyle={{
-            width: 200,
-            marginHorizontal: 50,
-            marginVertical: 10,
-            borderRadius: 10,
-          }}
-          titleStyle={{ color: "white", marginHorizontal: 20 }}
-          onPress={() =>
-            handleImageOperation(IMAGE_OPEARTIONS.DECREASE_BRIGHTNESS)
-          }
-        >
-          Decrease Brightness
-        </Button>
-
-        <Button
-          title="Dark"
-          buttonStyle={{ backgroundColor: "rgba(39, 39, 39, 1)" }}
-          containerStyle={{
-            width: 200,
-            marginHorizontal: 50,
-            marginVertical: 10,
-            borderRadius: 10,
-          }}
-          titleStyle={{ color: "white", marginHorizontal: 20 }}
-          onPress={() => handleImageOperation(IMAGE_OPEARTIONS.FLIP)}
-        >
-          Flip
-        </Button>
-      </View>
-
-      <View>
-        <Button
-          style={{ marginTop: 40 }}
+          buttonStyle={{ fontSize: 24 }}
           containerStyle={{
             borderRadius: 10,
-            marginTop: 40,
+            marginLeft: 280,
           }}
           onPress={() => {
             // TODO: Add share logic here
@@ -147,8 +111,51 @@ const ImageEditor = ({ setPage }) => {
           Share
         </Button>
       </View>
+
+      {base64 && (
+        <Image
+          style={{
+            height: 320,
+            width: 375,
+            borderRadius: 10,
+            marginVertical: 80,
+          }}
+          source={{ uri: `data:image/jpeg;base64,${base64}` }}
+        />
+      )}
+
+      <View
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+          width: "100%",
+        }}
+      >
+        {BUTTON_DATA.map((buttonData) => (
+          <CustomButton
+            key={buttonData.title} // Added key prop for list rendering
+            imageSource={buttonData.imageSource}
+            onPress={() => handleImageOperation(buttonData.operation)}
+            title={buttonData.title}
+          />
+        ))}
+      </View>
+
+      <Text
+        style={{
+          textAlign: "center",
+          fontSize: 16,
+          fontFamily: "Poppins-Regular",
+          marginTop: 25,
+        }}
+      >
+        Tap a button to edit the image
+      </Text>
     </View>
   );
 };
 
 export default ImageEditor;
+
