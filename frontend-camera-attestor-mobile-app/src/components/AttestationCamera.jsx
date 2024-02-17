@@ -109,24 +109,55 @@ const AttestationCamera = ({ deviceWallet, setPage }) => {
         backgroundColor: "#fff",
       }}
     >
-      <Text h1>PixelPolice</Text>
+      <Text h1 style={{ fontSize: 45, fontFamily: "Poppins-Regular" }}>
+        PixelPolice
+      </Text>
 
-      <Image source={require("../assets/logo.png")} />
+      <Image
+        style={{ height: "42%", width: "85%", marginVertical: 20 }}
+        source={require("../assets/logo.png")}
+      />
+
+      <Text
+        h4
+        h4Style={{
+          textAlign: "center",
+          fontSize: 24,
+          width: "60%",
+          fontWeight: 400,
+          fontFamily: "Poppins-Regular",
+        }}
+      >
+        ZK-powered content authentication
+      </Text>
 
       <Button
-        title="Dark"
+        title="Open Camera"
         buttonStyle={{ backgroundColor: "rgba(39, 39, 39, 1)" }}
         containerStyle={{
-          width: 200,
           marginHorizontal: 50,
-          marginVertical: 10,
+          marginTop: 60,
+          marginBottom: 15,
           borderRadius: 10,
         }}
         titleStyle={{ color: "white", marginHorizontal: 20 }}
         onPress={handleOpenCamera}
       >
-        Open Camera
+        <Image
+          style={{ height: 55, width: 55 }}
+          source={require("../assets/camera.jpg")}
+        />
       </Button>
+
+      <Text
+        style={{
+          textAlign: "center",
+          fontSize: 16,
+          fontFamily: "Poppins-Regular",
+        }}
+      >
+        Open Camera to get started
+      </Text>
     </View>
   );
 };
