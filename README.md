@@ -30,7 +30,7 @@ One of the most significant challenges was adapting to the RISC-0 EVM, a constra
 To address this, we developed our own image processing computations that are compatible with the RISC-0 EVM environment. Crafting these algorithms from scratch was a complex task, but it was crucial for ensuring our protocol could handle the intricate task of image verification and attestation.
 
 #### Managing Digital Content and Metadata
-Handling Vast Amounts of Data: A major part of our work involved dealing with extensive digital content, especially images and their metadata. This was necessary to build a solution compliant with the C2PA standard. Managing this large amount of data required sophisticated data processing and storage solutions.
+Handling Vast Amounts of Data: A major part of our work involved dealing with extensive digital content, especially images and their metadata. This was necessary to build a solution compliant with the C2PA standard. Managing this large amount of data requires sophisticated data processing and storage solutions.
 
 #### Building a Custom Rollup
 Developing a Unique Rollup: Perhaps the most ambitious part of our project was writing our own rollup. This involved creating a custom state machine with unique state transitions specifically designed to incorporate provable changes in digital content. The development of this rollup was critical in enabling our protocol to effectively trace and verify the history of an image or video.
@@ -52,3 +52,6 @@ Scroll Sepolia: 0x534701c017Fd02F8ecD128D6175cE88e1A4871b3
 OKX Testnet: 0x57D8C4870EDa80eD667d27f124226581B9822267
 
 ```
+## Website Deploy Links
+- [History Explorer](https://pixel-police-history-explorer.vercel.app/)
+- [News App](https://pixel-police-news-app.vercel.app/)
