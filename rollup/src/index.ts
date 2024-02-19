@@ -290,18 +290,20 @@ app.post("/", async (req: Request, res: Response) => {
 
     console.log("Current content state", currentContentState)
 
+    console.log(resp.data);
+
     contentState.push({
       uuid,
       updatedContent: resp.data.transformed_img,
       previousContent: currentContentState.updatedContent,
-      proof: '', // return proof as well
+      proof: resp.data.proof, 
       operation: operation
     })
     newState = {
       uuid,
       updatedContent: resp.data.transformed_img,
       previousContent: currentContentState.updatedContent,
-      proof: '',
+      proof: resp.data.proof,
       operation: operation
     };
   } else {
