@@ -17,9 +17,10 @@ use std::time::Duration;
 use anyhow::{anyhow, bail, Context, Result};
 use bonsai_sdk::alpha::{responses::SnarkReceipt, Client};
 use risc0_build::GuestListEntry;
-use risc0_zkvm::{
-    default_executor, ExecutorEnv, Journal, MemoryImage, Program, Receipt, GUEST_MAX_MEM, PAGE_SIZE,
-};
+// use risc0_zkvm::{
+//     default_executor, ExecutorEnv, Journal, MemoryImage, Program, Receipt, GUEST_MAX_MEM, PAGE_SIZE,
+// };
+use risc0_zkvm::{compute_image_id, serde::to_vec, Receipt, Journal};
 
 /// Result of executing a guest image, possibly containing a proof.
 pub enum Output {
@@ -32,34 +33,38 @@ pub enum Output {
 pub fn execute_locally(elf: &[u8], input: Vec<u8>) -> Result<Output> {
     // Execute the guest program, generating the session trace needed to prove the
     // computation.
-    let env = ExecutorEnv::builder()
-        .write_slice(&input)
-        .build()
-        .context("Failed to build exec env")?;
-    let exec = default_executor();
-    let session = exec
-        .execute_elf(env, elf)
-        .with_context(|| format!("Failed to run executor {:?}", &input))?;
+    // let env = ExecutorEnv::builder()
+    //     .write_slice(&input)
+    //     .build()
+    //     .context("Failed to build exec env")?;
+    // let exec = default_executor();
+    // let session = exec
+    //     .execute_elf(env, elf)
+    //     .with_context(|| format!("Failed to run executor {:?}", &input))?;
+    let journal: Journal =  Journal {
+        bytes: [1,2].to_vec(),
+    };
 
     Ok(Output::Execution {
-        journal: session.journal,
+        journal:  journal
     })
 }
 
 pub const POLL_INTERVAL_SEC: u64 = 4;
 
-fn get_digest(elf: &[u8]) -> Result<String> {
-    let program = Program::load_elf(elf, GUEST_MAX_MEM as u32)?;
-    let image = MemoryImage::new(&program, PAGE_SIZE as u32)?;
-    Ok(hex::encode(image.compute_id()))
-}
+// fn get_digest(elf: &[u8]) -> Result<String> {
+//     let program = Program::load_elf(elf, GUEST_MAX_MEM as u32)?;
+//     let image = MemoryImage::new(&program, PAGE_SIZE as u32)?;
+//     Ok(hex::encode(image.compute_id()))
+// }
 
 pub fn prove_alpha(elf: &[u8], input: Vec<u8>) -> Result<Output> {
     let client =
         Client::from_env(risc0_zkvm::VERSION).context("Failed to create client from env var")?;
 
-    let img_id = get_digest(elf).context("Failed to generate elf memory image")?;
-    client.upload_img(&img_id, elf.to_vec())?;
+    let img_id = hex::encode(compute_image_id(elf).unwrap());
+    // get_digest(elf).context("Failed to generate elf memory image")?;
+    // client.upload_img(&img_id, elf.to_vec())?;
 
     let input_id = client
         .upload_input(input)
