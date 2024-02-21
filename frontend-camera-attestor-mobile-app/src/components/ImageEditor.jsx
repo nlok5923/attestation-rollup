@@ -42,24 +42,28 @@ const ImageEditor = ({ setPage }) => {
     React.useContext(ImageContext);
 
   const handleImageOperation = async (operation) => {
-    console.log("OPERATION", operation);
-    console.log("UUID", uuid);
+    try {
+      console.log("OPERATION", operation);
+      console.log("UUID", uuid);
 
-    if (!base64 || !uuid) return;
+      if (!base64 || !uuid) return;
 
-    const response = await axios.post(rollupUrl, {
-      uuid,
-      previousContent: base64,
-      updatedContent: base64,
-      proof: "",
-      operation,
-    });
+      const response = await axios.post(rollupUrl, {
+        uuid,
+        previousContent: base64,
+        updatedContent: base64,
+        proof: "",
+        operation,
+      });
 
-    console.log("RESPONSE", response);
+      console.log("RESPONSE", response);
 
-    if (response.data.updatedContent) {
-      console.log("UPDATED IMAGE", response.data.updatedContent);
-      setBase64(response.data.updatedContent);
+      if (response.data.updatedContent) {
+        console.log("UPDATED IMAGE", response.data.updatedContent);
+        setBase64(response.data.updatedContent);
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 

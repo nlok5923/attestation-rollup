@@ -87,6 +87,9 @@ const AttestationCamera = ({ deviceWallet, setPage }) => {
                 setBase64(response.data.updatedContent);
                 setUuid(response.data.uuid);
                 setPage(PAGE_VALUES.editor);
+              })
+              .catch((error) => {
+                console.log("ERROR", error);
               });
           },
           (error) => {

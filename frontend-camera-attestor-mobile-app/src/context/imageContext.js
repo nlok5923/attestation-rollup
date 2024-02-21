@@ -4,7 +4,7 @@ const ImageContext = createContext(null);
 
 const ImageProvider = ({ children }) => {
   // Add your rollup server url here
-  const rollupUrl = "https://a968-119-82-122-198.ngrok-free.app/";
+  const rollupUrl = "https://094c-44-192-50-105.ngrok-free.app/";
 
   const [uri, setUri] = useState("");
   const [base64, setBase64] = useState("");
