@@ -5,29 +5,33 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { useEffect } from 'react';
 import { withRouter } from 'next/router';
+import copy from "clipboard-copy";
 import axios from "axios";
 
-export function Landing({props}) {
+export function Landing({ props }) {
   const [data, setData] = useState([]);
   const [uuid, setUuid] = useState("");
 
-  console.log('props', props)
+  // TODO: get the proof in this variable
+  const proof = "jbsadknaskldnasdekbdjeaaklsnlda";
+
+  console.log("props", props);
   const fetchData = async () => {
-    const baseURI = "http://localhost:3000";
-    
+    const baseURI = "https://094c-44-192-50-105.ngrok-free.app/";
+
     const historyResp = await axios.get(baseURI);
-    console.log('history', historyResp)
+    console.log("history", historyResp);
     const filter = historyResp.data.contentState.filter(
       (item) => item.uuid === uuid || item.uuid === props?.id
     );
     setData([...filter]);
   };
-    useEffect(() => {
-    if(props){
+  useEffect(() => {
+    if (props) {
       console.log("uuid", props?.id);
-      fetchData()
+      fetchData();
     }
-  }, []); 
+  }, []);
 
   return (
     <section className="w-[100vw] flex justify-center">
@@ -77,6 +81,16 @@ export function Landing({props}) {
                       {item.operation}
                     </p>
                     <p className="text-gray-600">{item.uuid}</p>
+                    <button
+                      className="cursor-copy text-white hover:text-slate-100 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 px-2 py-1 rounded-md"
+                      onClick={() => {
+                        copy(proof);
+                      }}
+                    >
+                      {proof.substring(0, 8) +
+                        "..." +
+                        proof.substring(proof.length - 8)}
+                    </button>
                   </div>
                 </div>
                 {index < data.length - 1 && (
