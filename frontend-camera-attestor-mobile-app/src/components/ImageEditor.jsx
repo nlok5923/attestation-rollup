@@ -18,22 +18,22 @@ const BUTTON_DATA = [
   {
     title: "Invert",
     operation: IMAGE_OPEARTIONS.INVERT_COLOR,
-    imageSource: require("../assets/invert.png"),
+    imageSource: require("../assets/invert.jpg"),
   },
   {
     title: "Increase Brightness",
     operation: IMAGE_OPEARTIONS.INCREASE_BRIGHTNESS,
-    imageSource: require("../assets/inc-brightness.png"),
+    imageSource: require("../assets/inc-brightness.jpg"),
   },
   {
     title: "Decrease Brightness",
     operation: IMAGE_OPEARTIONS.DECREASE_BRIGHTNESS,
-    imageSource: require("../assets/dec-brightness.png"),
+    imageSource: require("../assets/dec-brightness.jpg"),
   },
   {
     title: "Flip",
     operation: IMAGE_OPEARTIONS.FLIP,
-    imageSource: require("../assets/vert-flip.png"),
+    imageSource: require("../assets/vert-flip.jpg"),
   },
 ];
 
@@ -97,7 +97,7 @@ const ImageEditor = ({ setPage }) => {
               backgroundColor: "rgba(1, 1, 1)",
               borderRadius: 10,
             }}
-            source={require("../assets/back-arrow.png")}
+            source={require("../assets/back-arrow.jpg")}
           />
         </Button>
 

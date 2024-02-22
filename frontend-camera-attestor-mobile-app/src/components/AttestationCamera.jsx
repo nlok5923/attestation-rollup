@@ -118,7 +118,7 @@ const AttestationCamera = ({ deviceWallet, setPage }) => {
 
       <Image
         style={{ height: "42%", width: "85%", marginVertical: 20 }}
-        source={require("../assets/logo.png")}
+        source={require("../assets/logo.jpg")}
       />
 
       <Text
