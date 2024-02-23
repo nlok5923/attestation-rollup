@@ -12,9 +12,6 @@ export function Landing({ props }) {
   const [data, setData] = useState([]);
   const [uuid, setUuid] = useState("");
 
-  // TODO: get the proof in this variable
-  const proof = "jbsadknaskldnasdekbdjeaaklsnlda";
-
   console.log("props", props);
   const fetchData = async () => {
     const baseURI = "https://094c-44-192-50-105.ngrok-free.app/";
@@ -28,6 +25,7 @@ export function Landing({ props }) {
     const filter = historyResp.data.contentState.filter(
       (item) => item.uuid === uuid || item.uuid === props?.id
     );
+
     setData([...filter]);
   };
   useEffect(() => {
@@ -88,12 +86,10 @@ export function Landing({ props }) {
                     <button
                       className="cursor-copy text-white hover:text-slate-100 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 px-2 py-1 rounded-md"
                       onClick={() => {
-                        copy(proof);
+                        copy(item.proof);
                       }}
                     >
-                      {proof.substring(0, 8) +
-                        "..." +
-                        proof.substring(proof.length - 8)}
+                      {`Copy ${item.operation} Proof`}
                     </button>
                   </div>
                 </div>
