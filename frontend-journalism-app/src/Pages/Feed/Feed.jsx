@@ -49,8 +49,6 @@ const Feed = () => {
         }
       );
 
-      console.log(data.contentState[data.contentState.length - 1]);
-
       setFetchedPost({
         title: "Latest Image",
         content: "From Pixel Police Mobile App",

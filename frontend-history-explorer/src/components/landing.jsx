@@ -3,8 +3,8 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { useEffect } from 'react';
-import { withRouter } from 'next/router';
+import { useEffect } from "react";
+import { withRouter } from "next/router";
 import copy from "clipboard-copy";
 import axios from "axios";
 
@@ -84,7 +84,7 @@ export function Landing({ props }) {
                     </p>
                     <p className="text-gray-600">{item.uuid}</p>
                     <button
-                      className="cursor-copy text-white hover:text-slate-100 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 px-2 py-1 rounded-md"
+                      className="cursor-copy text-white hover:text-slate-100 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 px-2 py-3 rounded-md"
                       onClick={() => {
                         copy(item.proof);
                       }}
