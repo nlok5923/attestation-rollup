@@ -19,7 +19,11 @@ export function Landing({ props }) {
   const fetchData = async () => {
     const baseURI = "https://094c-44-192-50-105.ngrok-free.app/";
 
-    const historyResp = await axios.get(baseURI);
+    const historyResp = await axios.get(baseURI, {
+      headers: {
+        "ngrok-skip-browser-warning": "true",
+      },
+    });
     console.log("history", historyResp);
     const filter = historyResp.data.contentState.filter(
       (item) => item.uuid === uuid || item.uuid === props?.id
