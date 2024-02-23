@@ -89,6 +89,9 @@ const ImageEditor = ({ setPage }) => {
           containerStyle={{
             width: 40,
           }}
+          onPress={() => {
+            setPage(PAGE_VALUES.camera);
+          }}
         >
           <Image
             style={{
