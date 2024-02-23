@@ -13,7 +13,7 @@ const CustomButton = ({ onPress, imageSource, title }) => {
       <Button
         title="Dark"
         buttonStyle={{ backgroundColor: "white" }}
-        containerStyle={{}}
+        containerStyle={{ backgroundColor: "white" }}
         onPress={onPress}
       >
         <Image

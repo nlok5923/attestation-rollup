@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { Image, View, ActivityIndicator } from "react-native";
 import { Button, Text } from "@rneui/base";
 import axios from "axios";
 
@@ -41,7 +41,10 @@ const ImageEditor = ({ setPage }) => {
   const { uri, uuid, base64, rollupUrl, setBase64 } =
     React.useContext(ImageContext);
 
+  const [isLoading, setIsLoading] = React.useState(false);
+
   const handleImageOperation = async (operation) => {
+    setIsLoading(true);
     try {
       console.log("OPERATION", operation);
       console.log("UUID", uuid);
@@ -65,6 +68,7 @@ const ImageEditor = ({ setPage }) => {
     } catch (err) {
       console.log(err);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -72,7 +76,6 @@ const ImageEditor = ({ setPage }) => {
       style={{
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
         height: "100%",
         backgroundColor: "#fff",
       }}
@@ -82,6 +85,7 @@ const ImageEditor = ({ setPage }) => {
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
+          marginTop: 30,
         }}
       >
         <Button
@@ -125,7 +129,7 @@ const ImageEditor = ({ setPage }) => {
             height: 320,
             width: 375,
             borderRadius: 10,
-            marginVertical: 80,
+            marginVertical: 70,
           }}
           source={{ uri: `data:image/jpeg;base64,${base64}` }}
         />
@@ -155,14 +159,16 @@ const ImageEditor = ({ setPage }) => {
           textAlign: "center",
           fontSize: 16,
           fontFamily: "Poppins-Regular",
-          marginTop: 25,
+          marginTop: 20,
+          marginBottom: 25,
         }}
       >
         Tap a button to edit the image
       </Text>
+
+      <ActivityIndicator animating={isLoading} size="large" color="#000000" />
     </View>
   );
 };
 
 export default ImageEditor;
-
