@@ -45,7 +45,7 @@ export function Landing({ props }) {
             }`}
           >
             <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl">
-              Welcome to Pixel Police Explorer
+              Welcome to Image History Explorer
             </h1>
             <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
               Enter image id below to start searching

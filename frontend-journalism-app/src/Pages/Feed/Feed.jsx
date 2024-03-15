@@ -51,7 +51,7 @@ const Feed = () => {
 
       setFetchedPost({
         title: "Latest Image",
-        content: "From Pixel Police Mobile App",
+        content: "From Mobile App",
         image:
           "data:image/png;base64," +
           data.contentState[data.contentState.length - 1].updatedContent,

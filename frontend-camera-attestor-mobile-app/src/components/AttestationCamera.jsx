@@ -112,10 +112,6 @@ const AttestationCamera = ({ deviceWallet, setPage }) => {
         backgroundColor: "#fff",
       }}
     >
-      <Text h1 style={{ fontSize: 45, fontFamily: "Poppins-Regular" }}>
-        PixelPolice
-      </Text>
-
       <Image
         style={{ height: "42%", width: "85%", marginVertical: 20 }}
         source={require("../assets/logo.jpg")}
