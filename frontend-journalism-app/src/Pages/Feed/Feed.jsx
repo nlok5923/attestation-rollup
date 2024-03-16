@@ -55,7 +55,7 @@ const Feed = () => {
         image:
           "data:image/png;base64," +
           data.contentState[data.contentState.length - 1].updatedContent,
-        historyLink: `https://pixel-police-history-explorer.vercel.app/${
+        historyLink: `https://image-history-explorer.vercel.app/${
           data.contentState[data.contentState.length - 1].uuid
         }`,
       });
